@@ -1,3 +1,5 @@
+package com.example.kinomanager;
+
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -34,7 +36,7 @@ public class ImpostaPrezziController {
 
     @FXML
     void back(MouseEvent event) throws IOException {
-    	FXMLLoader loader=new FXMLLoader(getClass().getResource("HomeGestore.fxml"));
+    	FXMLLoader loader=new FXMLLoader(getClass().getResource("com/example/kinomanager/HomeGestore.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();

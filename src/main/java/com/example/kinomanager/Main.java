@@ -1,3 +1,5 @@
+package com.example.kinomanager;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -13,7 +15,7 @@ public class Main extends Application {
 
 	    public void start(Stage primaryStage) throws Exception{
 
-			FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("gestoreController.ViewLoginGestore.fxml"));
+			FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("ViewLoginGestore.fxml"));
 
 			fxmlLoader.setRoot(new AnchorPane());
 

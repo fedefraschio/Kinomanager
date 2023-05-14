@@ -1,3 +1,5 @@
+package com.example.kinomanager;
+
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -41,7 +43,7 @@ public class HomeGestoreController {
 	
 	public void toSconti(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("ViewPubblicaSconti.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("com/example/kinomanager/ViewPubblicaSconti.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -52,7 +54,7 @@ public class HomeGestoreController {
 	
 	public void toProgrammazione(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("ViewGestioneProgrammazione.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("com/example/kinomanager/ViewGestioneProgrammazione.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -63,7 +65,7 @@ public class HomeGestoreController {
 	
 	public void toPrezzi(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("ViewImpostaPrezzi.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("com/example/kinomanager/ViewImpostaPrezzi.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -74,7 +76,7 @@ public class HomeGestoreController {
 	
 	public void toAggiungiCassiere(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("ViewAggiungiCassiere.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("com/example/kinomanager/ViewAggiungiCassiere.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -85,7 +87,7 @@ public class HomeGestoreController {
 	
 	public void toRimuoviCassiere(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("ViewRimuoviCassiere.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("com/example/kinomanager/ViewRimuoviCassiere.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
