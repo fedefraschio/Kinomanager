@@ -22,7 +22,7 @@
                </font>
             </Text>
             <Text layoutX="166.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendi biglietti ad un cliente" textAlignment="CENTER" wrappingWidth="267.943359375" />
-            <MenuButton layoutX="50.0" layoutY="121.0" mnemonicParsing="false" text="Film">
+            <MenuButton layoutX="59.0" layoutY="121.0" mnemonicParsing="false" text="Film">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -35,7 +35,7 @@
               </items>
             </MenuButton>
             <TextArea layoutX="308.0" layoutY="209.0" prefHeight="125.0" prefWidth="268.0" />
-            <Button layoutX="388.0" layoutY="121.0" mnemonicParsing="false" text="Cerca" />
+            <Button layoutX="349.0" layoutY="121.0" mnemonicParsing="false" text="Cerca" />
             <Text layoutX="306.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Posti disponibili:" />
             <Button layoutX="434.0" layoutY="354.0" mnemonicParsing="false" text="Vendi" />
             <TextField layoutX="105.0" layoutY="354.0" promptText="Posti scelti" />
