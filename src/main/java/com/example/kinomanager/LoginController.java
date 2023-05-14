@@ -36,7 +36,8 @@ public class LoginController {
 		
 		if(username.contentEquals(usernameTest) && password.contentEquals(passwordTest))
 		{
-			FXMLLoader loader=new FXMLLoader(getClass().getResource("com/example/kinomanager/HomeGestore.fxml"));
+			//FXMLLoader loader=new FXMLLoader(getClass().getResource("com/example/kinomanager/HomeGestore.fxml"));
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("HomeGestore.fxml"));
 			root=loader.load();
 			HomeGestoreController homeGestoreController=loader.getController();
 			
