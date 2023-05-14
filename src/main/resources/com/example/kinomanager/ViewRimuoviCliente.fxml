@@ -17,7 +17,7 @@
                   <Font name="Yu Gothic Regular" size="36.0" />
                </font>
             </Text>
-            <Text layoutX="248.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indica un cassiere da rimuovere." textAlignment="CENTER" wrappingWidth="207.13668823242188" AnchorPane.bottomAnchor="324.0" AnchorPane.leftAnchor="248.0" AnchorPane.rightAnchor="248.86331176757812" AnchorPane.topAnchor="81.0">
+            <Text layoutX="248.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indica un cliente da rimuovere." textAlignment="CENTER" wrappingWidth="207.13668823242188" AnchorPane.bottomAnchor="324.0" AnchorPane.leftAnchor="248.0" AnchorPane.rightAnchor="248.86331176757812" AnchorPane.topAnchor="81.0">
                <font>
                   <Font name="Yu Gothic Regular" size="12.0" />
                </font>
@@ -42,7 +42,7 @@
                   <TableColumn prefWidth="75.0" text="Password" />
                </columns>
             </TableView>
-            <TextField layoutX="118.0" layoutY="371.0" promptText="Username del cassiere" />
+            <TextField layoutX="118.0" layoutY="371.0" promptText="Username del cliente" />
          </children>
       </AnchorPane>
    </children>
