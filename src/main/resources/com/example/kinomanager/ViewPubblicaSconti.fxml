@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewgestore.PubblicaScontiController">
+   <children>
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="390.0" prefWidth="652.0">
+         <children>
+            <Text layoutX="349.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KINOMANAGER" wrappingWidth="299.13671875">
+               <font>
+                  <Font name="Yu Gothic Regular" size="36.0" />
+               </font>
+            </Text>
+            <Text layoutX="152.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Immetti lo sconto (%), la fascia d'età, le date di inizio e fine." wrappingWidth="333.5367126464844" AnchorPane.bottomAnchor="239.73398437499998" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="174.46328735351562" AnchorPane.topAnchor="137.44140625">
+               <font>
+                  <Font name="Yu Gothic Regular" size="12.0" />
+               </font>
+            </Text>
+            <Button fx:id="backButton" layoutX="532.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#back" text="Ritorna alla Home">
+               <font>
+                  <Font name="Yu Gothic Regular" size="12.0" />
+               </font>
+            </Button>
+            <TextField fx:id="scontoText" layoutX="152.0" layoutY="195.0" prefHeight="26.0" prefWidth="70.0" promptText="Sconto" />
+            <Button fx:id="pubblica" layoutX="286.0" layoutY="302.0" mnemonicParsing="false" onMouseClicked="#submit" text="Pubblica">
+               <font>
+                  <Font name="Yu Gothic Regular" size="12.0" />
+               </font>
+            </Button>
+            <DatePicker fx:id="dataStart" layoutX="318.0" layoutY="195.0" promptText="Data di inizio" />
+            <DatePicker fx:id="dataEnd" layoutX="318.0" layoutY="239.0" promptText="Data di fine" />
+            <ComboBox fx:id="etaBox" layoutX="135.0" layoutY="239.0" prefWidth="150.0" promptText="Età" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
