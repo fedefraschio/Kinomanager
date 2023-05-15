@@ -1,4 +1,4 @@
-package com.example.kinomanager.model;
+package com.example.kinomanager;
 
 import java.time.DayOfWeek;
 

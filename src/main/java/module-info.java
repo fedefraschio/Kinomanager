@@ -5,4 +5,5 @@ module com.example.kinomanager {
 
     opens com.example.kinomanager to javafx.fxml;
     exports com.example.kinomanager;
+
 }

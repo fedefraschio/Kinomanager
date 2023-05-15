@@ -26,7 +26,7 @@
                   <Font name="Yu Gothic Regular" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="196.0" layoutY="232.0" mnemonicParsing="false" text="Aggiungi Cassiere">
+            <Button fx:id="toAggiungi" layoutX="196.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#toAggiungiCassiere" text="Aggiungi Cassiere">
                <font>
                   <Font name="Yu Gothic Regular" size="12.0" />
                </font>

@@ -1,5 +1,4 @@
-import com.example.kinomanager.RigaProgrammazione;
-import com.example.kinomanager.model.Cassiere;
+package com.example.kinomanager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.Month;
 import java.util.ResourceBundle;
 

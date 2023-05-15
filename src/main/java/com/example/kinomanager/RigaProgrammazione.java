@@ -1,11 +1,7 @@
 package com.example.kinomanager;
 
-import com.example.kinomanager.model.GiornoDellaSettimana;
-import com.example.kinomanager.model.Spettacolo;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Comparator;
 
 /*
 classe di supporto per creare le righe con cui popolare la

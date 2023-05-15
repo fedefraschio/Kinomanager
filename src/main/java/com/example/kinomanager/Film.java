@@ -1,4 +1,4 @@
-package com.example.kinomanager.model;
+package com.example.kinomanager;
 
 public class Film {
 

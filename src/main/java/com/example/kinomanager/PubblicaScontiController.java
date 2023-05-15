@@ -3,12 +3,10 @@ package com.example.kinomanager;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.Month;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.example.kinomanager.model.GiornoDellaSettimana;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

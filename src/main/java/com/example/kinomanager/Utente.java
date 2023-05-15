@@ -1,4 +1,4 @@
-package com.example.kinomanager.model;
+package com.example.kinomanager;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -8,15 +8,15 @@ public class Utente{
     private String email;
     private String nome;
     private String cognome;
-    private LocalDate datadDiNascita;
+    private LocalDate data;
     private String password;
 
-    public Utente(String username, String email, String nome, String cognome, LocalDate datadDiNascita, String password) {
+    public Utente(String username, String email, String nome, String cognome, LocalDate data, String password) {
         this.username = username;
         this.email = email;
         this.nome = nome;
         this.cognome = cognome;
-        this.datadDiNascita = datadDiNascita;
+        this.data = data;
         this.password=password;
     }
 
@@ -52,12 +52,12 @@ public class Utente{
         this.cognome = cognome;
     }
 
-    public LocalDate getDatadDiNascita() {
-        return datadDiNascita;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setDatadDiNascita(LocalDate datadDiNascita) {
-        this.datadDiNascita = datadDiNascita;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
     public String getPassword() {
