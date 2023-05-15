@@ -1,28 +1,32 @@
 package com.example.kinomanager;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ImpostaPrezziController {
+public class ImpostaPrezziController implements Initializable {
 
 
     @FXML
     private Button backButton;
 
     @FXML
-    private Button submitAbbonamento;
+    private Button buttonAbbonamento;
 
     @FXML
-    private Button submitBiglietto;
+    private Button buttonBiglietto;
 
     @FXML
     private TextField textAbbonamento;
@@ -33,6 +37,9 @@ public class ImpostaPrezziController {
     private Stage stage;
 	private Scene scene; 
 	private Parent root;
+
+    private float prezzoBiglietto;
+    private float prezzoAbbonamento;
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -46,10 +53,23 @@ public class ImpostaPrezziController {
 	}
     
     @FXML
-    void submit(MouseEvent e)
+    void submitBiglietto(MouseEvent e)
     {
-    	textBiglietto.clear();
-    	textAbbonamento.clear();
+        this.prezzoBiglietto=Float.parseFloat(this.textBiglietto.getText());
+        this.textBiglietto.setText(""+this.prezzoBiglietto);
     }
-	
+    @FXML
+    void submitAbbonamento(MouseEvent e)
+    {
+        this.prezzoAbbonamento=Float.parseFloat(this.textAbbonamento.getText());
+        this.textAbbonamento.setText(""+this.prezzoAbbonamento);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.prezzoBiglietto= 9.00F;
+        this.prezzoAbbonamento= 40.00F;
+        this.textBiglietto.setText(""+this.prezzoBiglietto);
+        this.textAbbonamento.setText(""+this.prezzoAbbonamento);
+    }
 }

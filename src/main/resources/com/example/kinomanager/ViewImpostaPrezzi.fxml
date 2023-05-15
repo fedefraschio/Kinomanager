@@ -25,14 +25,14 @@
                   <Font name="Yu Gothic Regular" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="textBiglietto" layoutX="182.0" layoutY="195.0" prefHeight="26.0" prefWidth="70.0" promptText="Biglietto" />
-            <Button fx:id="submitBiglietto" layoutX="185.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#submit" text="Pubblica">
+            <TextField fx:id="textBiglietto" layoutX="134.0" layoutY="182.0" prefHeight="26.0" prefWidth="139.0" promptText="Prezzo biglietto attuale" />
+            <Button fx:id="buttonBiglietto" layoutX="171.0" layoutY="234.0" mnemonicParsing="false" onMouseClicked="#submitBiglietto" text="Aggiorna">
                <font>
                   <Font name="Yu Gothic Regular" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="textAbbonamento" layoutX="372.0" layoutY="195.0" prefHeight="26.0" prefWidth="94.0" promptText="Abbonamento" />
-            <Button fx:id="submitAbbonamento" layoutX="381.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#submit" text="Pubblica">
+            <TextField fx:id="textAbbonamento" layoutX="333.0" layoutY="183.0" prefHeight="26.0" prefWidth="166.0" promptText="Prezzo abbonamento attuale" />
+            <Button fx:id="buttonAbbonamento" layoutX="384.0" layoutY="234.0" mnemonicParsing="false" onMouseClicked="#submitAbbonamento" text="Aggiorna">
                <font>
                   <Font name="Yu Gothic Regular" size="12.0" />
                </font>
