@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
@@ -115,7 +116,7 @@ public class GestioneProgrammazioneController implements Initializable{
 		giornoDellaSettimana.setCellValueFactory(new PropertyValueFactory<RigaProgrammazione,GiornoDellaSettimana>("giornoDellaSettimana"));
 		data.setCellValueFactory(new PropertyValueFactory<RigaProgrammazione, LocalDate>("data"));
 		ora.setCellValueFactory(new PropertyValueFactory<RigaProgrammazione, LocalTime>("ora"));
-		
+		giornoDellaSettimanaInput.setEditable(false);
 		programmazione.setItems(list);
 		list.sort(rigaProgrammazioneComparator);
 	}
@@ -126,13 +127,19 @@ public class GestioneProgrammazioneController implements Initializable{
 	{
 		RigaProgrammazione rigaProgrammazione =new RigaProgrammazione(nomeInput.getText(),
 				Integer.parseInt(salaInput.getText()),
-				GiornoDellaSettimana.getGiornoDaString(giornoDellaSettimanaInput.getText()),
+				GiornoDellaSettimana.getGiornoDaDay(LocalDate.parse(dataInput.getText()).getDayOfWeek()),
 				LocalDate.parse(dataInput.getText()),
 				LocalTime.parse(orarioInput.getText()));
 		ObservableList<RigaProgrammazione> righe=programmazione.getItems();
 		righe.add(rigaProgrammazione);
 		programmazione.setItems(righe);
 		list.sort(rigaProgrammazioneComparator);
+
+		nomeInput.clear();
+		salaInput.clear();
+		giornoDellaSettimanaInput.clear();
+		dataInput.clear();
+		orarioInput.clear();
 	}
 	
 	@FXML
@@ -222,6 +229,7 @@ public class GestioneProgrammazioneController implements Initializable{
 		dataInput.setText(String.valueOf(clickedRigaProgrammazione.getData()));
 		orarioInput.setText(String.valueOf(clickedRigaProgrammazione.getOra()));
 	}
+
 
 }
 
