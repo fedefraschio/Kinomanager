@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MostraProgrammazioneController {
-    private Programmazione programmazione = new Programmazione(new ArrayList<>());
+    //private Programmazione programmazione = new Programmazione(new ArrayList<>());
     @FXML
     TableView<TableColumn> tabella;
     @FXML
@@ -33,12 +33,12 @@ public class MostraProgrammazioneController {
 
 
 
-    public void mostraProgrammazione(MouseEvent mouseEvent) {
-        this.programmazione.addSpettacolo(new Spettacolo(GiornoDellaSettimana.Giovedì, new Film("Shrek", "avventura"),
-                new Sala(3, 100), LocalTime.of(20, 00)));
-        this.programmazione.addSpettacolo(new Spettacolo(GiornoDellaSettimana.Giovedì, new Film("Shrek", "avventura"),
-                new Sala(3, 100), LocalTime.of(20, 00)));
-        this.programmazione.addSpettacolo(new Spettacolo(GiornoDellaSettimana.Giovedì, new Film("Shrek", "avventura"),
-                new Sala(3, 100), LocalTime.of(20, 00)));
-    }
+//    public void mostraProgrammazione(MouseEvent mouseEvent) {
+//        this.programmazione.addSpettacolo(new Spettacolo(GiornoDellaSettimana.Giovedì, new Film("Shrek", "avventura"),
+//                new Sala(3, 100), LocalTime.of(20, 00)));
+//        this.programmazione.addSpettacolo(new Spettacolo(GiornoDellaSettimana.Giovedì, new Film("Shrek", "avventura"),
+//                new Sala(3, 100), LocalTime.of(20, 00)));
+//        this.programmazione.addSpettacolo(new Spettacolo(GiornoDellaSettimana.Giovedì, new Film("Shrek", "avventura"),
+//                new Sala(3, 100), LocalTime.of(20, 00)));
+//    }
 }

@@ -5,7 +5,17 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Locale;
 import java.util.ResourceBundle;
+
+import com.example.kinomanager.model.Film;
+import com.example.kinomanager.model.GiornoDellaSettimana;
+import com.example.kinomanager.model.Sala;
+import com.example.kinomanager.model.Spettacolo;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,25 +37,31 @@ public class GestioneProgrammazioneController implements Initializable{
 	private Parent root;
 
 	@FXML
-    private TableView<Riga> programmazione;
+    private TableView<RigaProgrammazione> programmazione;
 	
 	@FXML
-	private TableColumn<Riga, String> titolo;
+	private TableColumn<RigaProgrammazione, String> titolo;
 	
 	@FXML
-    private TableColumn<Riga, Integer> sala;
+    private TableColumn<RigaProgrammazione, Integer> sala;
+
+	@FXML
+	private TableColumn<RigaProgrammazione, GiornoDellaSettimana> giornoDellaSettimana;
 	
     @FXML
-    private TableColumn<Riga, LocalDate> data;
+    private TableColumn<RigaProgrammazione, LocalDate> data;
 
     @FXML
-    private TableColumn<Riga, LocalTime> ora;
+    private TableColumn<RigaProgrammazione, LocalTime> ora;
 
     @FXML
     private TextField nomeInput;
     
     @FXML
     private TextField salaInput;
+
+	@FXML
+	private TextField giornoDellaSettimanaInput;
     
     @FXML
     private TextField dataInput;
@@ -71,45 +87,63 @@ public class GestioneProgrammazioneController implements Initializable{
     @FXML
     private Button back;
 
-   
+	//comparator per ordinare la table
+	Comparator<RigaProgrammazione> rigaProgrammazioneComparator= Comparator.comparing(RigaProgrammazione::getData).
+			thenComparing(RigaProgrammazione::getOra).thenComparing(RigaProgrammazione::getSala);
+
+
+	//dati per la tabella
+   	Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
+			new Film("Fast X","Azione"), new Sala(5),
+			LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(21,00));
+	Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
+			new Film("Love Again","Romantico"), new Sala(4),
+			LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(15,30));
+	Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
+			new Film("Borromini e Bernini","Storico"), new Sala(1),
+			LocalDate.of(2023, Month.JUNE, 21), LocalTime.of(21,00));
     
-    ObservableList<Riga> list=FXCollections.observableArrayList(
-    		new Riga("Fast X", 5, LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(21,00)),
-			new Riga("Love Again", 4, LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(15,30)),
-			new Riga("Borromini e Bernini", 1, LocalDate.of(2023, Month.JUNE, 21), LocalTime.of(21,00)));
+    ObservableList<RigaProgrammazione> list=FXCollections.observableArrayList(
+			new RigaProgrammazione(s1),new RigaProgrammazione(s2),new RigaProgrammazione(s3));
+
+	//
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		titolo.setCellValueFactory(new PropertyValueFactory<Riga, String>("titolo"));
-		sala.setCellValueFactory(new PropertyValueFactory<Riga, Integer>("sala"));
-		data.setCellValueFactory(new PropertyValueFactory<Riga, LocalDate>("data"));
-		ora.setCellValueFactory(new PropertyValueFactory<Riga, LocalTime>("ora"));
+		titolo.setCellValueFactory(new PropertyValueFactory<RigaProgrammazione, String>("titolo"));
+		sala.setCellValueFactory(new PropertyValueFactory<RigaProgrammazione, Integer>("sala"));
+		giornoDellaSettimana.setCellValueFactory(new PropertyValueFactory<RigaProgrammazione,GiornoDellaSettimana>("giornoDellaSettimana"));
+		data.setCellValueFactory(new PropertyValueFactory<RigaProgrammazione, LocalDate>("data"));
+		ora.setCellValueFactory(new PropertyValueFactory<RigaProgrammazione, LocalTime>("ora"));
 		
 		programmazione.setItems(list);
+		list.sort(rigaProgrammazioneComparator);
 	}
 	
 	//Submit button
 	@FXML
 	void submit (MouseEvent event)
 	{
-		Riga riga=new Riga(nomeInput.getText(),
+		RigaProgrammazione rigaProgrammazione =new RigaProgrammazione(nomeInput.getText(),
 				Integer.parseInt(salaInput.getText()),
+				GiornoDellaSettimana.getGiornoDaString(giornoDellaSettimanaInput.getText()),
 				LocalDate.parse(dataInput.getText()),
 				LocalTime.parse(orarioInput.getText()));
-		ObservableList<Riga> righe=programmazione.getItems();
-		righe.add(riga);
+		ObservableList<RigaProgrammazione> righe=programmazione.getItems();
+		righe.add(rigaProgrammazione);
 		programmazione.setItems(righe);
+		list.sort(rigaProgrammazioneComparator);
 	}
 	
 	@FXML
 	void submitData(MouseEvent event)
 	{
-		ObservableList<Riga> currentTableData=programmazione.getItems();
+		ObservableList<RigaProgrammazione> currentTableData=programmazione.getItems();
 		String titolo=nomeInput.getText();
 		int sala=Integer.parseInt(salaInput.getText());
 		LocalTime orario=LocalTime.parse(orarioInput.getText());
 		
-		for(Riga r: currentTableData)
+		for(RigaProgrammazione r: currentTableData)
 		{
 			if(r.getTitolo().equals(titolo) &&
 					r.getSala()==sala &&
@@ -118,10 +152,11 @@ public class GestioneProgrammazioneController implements Initializable{
 				r.setData(LocalDate.parse(dataInput.getText()));
 				programmazione.setItems(currentTableData);
 				programmazione.refresh();
+				list.sort(rigaProgrammazioneComparator);
 				break;
 			}
 		}
-			
+
 	}
 	
 	@FXML
@@ -131,17 +166,18 @@ public class GestioneProgrammazioneController implements Initializable{
 		salaInput.clear();
 		orarioInput.clear();
 		dataInput.clear();
+		giornoDellaSettimanaInput.clear();
 	}
 	
 	@FXML
 	void submitOra(MouseEvent event)
 	{
-		ObservableList<Riga> currentTableData=programmazione.getItems();
+		ObservableList<RigaProgrammazione> currentTableData=programmazione.getItems();
 		String titolo=nomeInput.getText();
 		int sala=Integer.parseInt(salaInput.getText());
 		LocalDate data=LocalDate.parse(dataInput.getText());
 		
-		for(Riga r: currentTableData)
+		for(RigaProgrammazione r: currentTableData)
 		{
 			if(r.getTitolo().equals(titolo) &&
 					r.getSala()==sala &&
@@ -151,6 +187,7 @@ public class GestioneProgrammazioneController implements Initializable{
 				r.setOra(LocalTime.parse(orarioInput.getText()));
 				programmazione.setItems(currentTableData);
 				programmazione.refresh();
+				list.sort(rigaProgrammazioneComparator);
 				break;
 			}
 		}
@@ -178,11 +215,12 @@ public class GestioneProgrammazioneController implements Initializable{
 	@FXML
 	void rowClicked(MouseEvent event)
 	{
-		Riga clickedRiga=programmazione.getSelectionModel().getSelectedItem();
-		nomeInput.setText(String.valueOf(clickedRiga.getTitolo()));
-		salaInput.setText(String.valueOf(clickedRiga.getSala()));
-		dataInput.setText(String.valueOf(clickedRiga.getData()));
-		orarioInput.setText(String.valueOf(clickedRiga.getOra()));
+		RigaProgrammazione clickedRigaProgrammazione =programmazione.getSelectionModel().getSelectedItem();
+		nomeInput.setText(String.valueOf(clickedRigaProgrammazione.getTitolo()));
+		salaInput.setText(String.valueOf(clickedRigaProgrammazione.getSala()));
+		giornoDellaSettimanaInput.setText(String.valueOf(clickedRigaProgrammazione.getGiornoDellaSettimana()));
+		dataInput.setText(String.valueOf(clickedRigaProgrammazione.getData()));
+		orarioInput.setText(String.valueOf(clickedRigaProgrammazione.getOra()));
 	}
 
 }
