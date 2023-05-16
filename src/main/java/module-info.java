@@ -13,5 +13,7 @@ module com {
     opens com.controller.gestore;
     exports com.util;
     opens com.util;
+    exports com.app to javafx.graphics;
+    opens com.app;
 
 }
