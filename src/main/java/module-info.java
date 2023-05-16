@@ -5,8 +5,6 @@ module com {
 
     opens com.model;
     exports com.model;
-    exports com to javafx.graphics;
-    opens com;
     exports com.controller;
     opens com.controller;
     exports com.controller.gestore;
