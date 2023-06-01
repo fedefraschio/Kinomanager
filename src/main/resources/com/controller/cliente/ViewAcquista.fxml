@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="299.0">
          <children>
@@ -26,14 +25,19 @@
                   <Font name="Yu Gothic Regular" size="14.0" />
                </font>
             </Text>
-            <Text layoutX="35.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai 1 abbonamento attivo! Scadenza: 23/03/2023" wrappingWidth="226.13671875">
+            <Text fx:id="abbonamentoAttivoLabel" layoutX="35.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai 1 abbonamento attivo! Scadenza: 23/10/2023" wrappingWidth="226.13671875">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
             <Text layoutX="35.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vuoi attivare un nuovo abbonamento?" />
-            <Button layoutX="35.0" layoutY="246.0" mnemonicParsing="false" text="Prosegui" />
-            <DatePicker layoutX="35.0" layoutY="199.0" promptText="Scegli una data..." />
+            <Button fx:id="abbonamentoButton" layoutX="35.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#creaAbbonamento" text="Prosegui" />
+            <DatePicker fx:id="abbonamentoDatePicker" layoutX="35.0" layoutY="199.0" promptText="Scegli una data..." />
+            <Button fx:id="back" layoutX="8.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#back" text="Ritorna alla Home">
+               <font>
+                  <Font name="Yu Gothic Regular" size="12.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -42,31 +46,15 @@
                   <Font name="Yu Gothic Regular" size="24.0" />
                </font>
             </Text>
-            <MenuButton layoutX="14.0" layoutY="91.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Film">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Pirati dei Caraibi" />
-                <MenuItem mnemonicParsing="false" text="Cars" />
-                  <MenuItem mnemonicParsing="false" text="Shrek" />
-              </items>
-            </MenuButton>
-            <MenuButton layoutX="179.0" layoutY="91.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Giorno della settimana">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="LUNEDI" />
-                  <MenuItem mnemonicParsing="false" text="MARTEDI" />
-                  <MenuItem mnemonicParsing="false" text="MERCOLEDI" />
-                  <MenuItem mnemonicParsing="false" text="GIOVEDI" />
-                  <MenuItem mnemonicParsing="false" text="VENERDI" />
-                  <MenuItem mnemonicParsing="false" text="SABATO" />
-                  <MenuItem mnemonicParsing="false" text="DOMENICA" />
-               </items>
-            </MenuButton>
             <Label layoutX="23.0" layoutY="162.0" prefHeight="17.0" prefWidth="137.0" text="Spettacoli trovati:" />
-            <Button layoutX="123.0" layoutY="128.0" mnemonicParsing="false" text="Cerca..." />
-            <ListView layoutX="21.0" layoutY="179.0" prefHeight="87.0" prefWidth="255.0" />
+            <Button fx:id="cercaBigliettoButton" layoutX="123.0" layoutY="128.0" mnemonicParsing="false" onMouseClicked="#cercaBiglietto" text="Cerca..." />
+            <ListView fx:id="filmList" layoutX="21.0" layoutY="179.0" prefHeight="87.0" prefWidth="255.0" />
             <Label layoutX="23.0" layoutY="273.0" prefHeight="17.0" prefWidth="137.0" text="Posti disponibili:" />
-            <ListView layoutX="23.0" layoutY="290.0" prefHeight="44.0" prefWidth="255.0" />
-            <TextField layoutX="21.0" layoutY="359.0" prefHeight="25.0" prefWidth="118.0" promptText="Quantità" />
-            <Button layoutX="179.0" layoutY="359.0" mnemonicParsing="false" text="Acquista" />
+            <TextField fx:id="quantitaPostiField" layoutX="21.0" layoutY="359.0" prefHeight="25.0" prefWidth="118.0" promptText="Quantità" />
+            <Button fx:id="acquistaBigliettoButton" layoutX="179.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#acquistaBiglietto" text="AcquistaController" />
+            <ComboBox fx:id="filmComboBox" layoutX="16.0" layoutY="91.0" prefHeight="26.0" prefWidth="85.0" promptText="Film" />
+            <DatePicker fx:id="bigliettoDatePicker" layoutX="161.0" layoutY="91.0" prefHeight="26.0" prefWidth="116.0" promptText="Data" />
+            <TextField fx:id="postiTextField" layoutX="22.0" layoutY="297.0" prefHeight="26.0" prefWidth="145.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>
