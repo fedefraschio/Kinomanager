@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.cliente.AcquistaController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="299.0">
          <children>
@@ -25,7 +25,7 @@
                   <Font name="Yu Gothic Regular" size="14.0" />
                </font>
             </Text>
-            <Text fx:id="abbonamentoAttivoLabel" layoutX="35.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai 1 abbonamento attivo! Scadenza: 23/10/2023" wrappingWidth="226.13671875">
+            <Text fx:id="abbonamentoAttivoLabel" layoutX="35.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="226.13671875">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
