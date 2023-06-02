@@ -43,4 +43,15 @@ public class Sala {
     private void setListaPosti(List<Posto> listaPosti) {
         this.listaPosti = new ArrayList<>(listaPosti);
     }
+
+    private int getPostiRimanenti()
+    {
+        int result=0;
+        for(Posto p:listaPosti)
+        {
+            if(p.isFree())
+                result++;
+        }
+        return result;
+    }
 }

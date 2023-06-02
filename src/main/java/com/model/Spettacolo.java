@@ -57,4 +57,10 @@ public class Spettacolo {
     public void setData(LocalDate data) {
         this.data = data;
     }
+
+    //metodo extra per acquistare biglietti
+    public void acquistaBiglietti(int numeroBigliettiComprati)
+    {
+
+    }
 }

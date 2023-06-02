@@ -8,10 +8,13 @@ import java.time.LocalTime;
 public class Abbonamento {
     private int id;
     private LocalDate dataAttivazione; // la data finale viene dedotta, in quanto ogni abbonamento vale 90 giorni
+    private Cliente cliente;
 
-    public Abbonamento(int id, LocalDate dataAttivazione) {
+
+    public Abbonamento(int id, LocalDate dataAttivazione,Cliente cliente) {
         this.id = id;
         this.dataAttivazione=dataAttivazione;
+        this.cliente=cliente;
     }
 
     public int getId() {
@@ -28,6 +31,14 @@ public class Abbonamento {
 
     public void setDataAttivazione(LocalDate dataAttivazione) {
         this.dataAttivazione = dataAttivazione;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public long validitaRimanente()
