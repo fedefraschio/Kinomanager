@@ -1,7 +1,6 @@
 package com.controller.cliente;
 
 import com.model.*;
-import com.util.RigaProgrammazione;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,7 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -93,12 +91,14 @@ public class AcquistaController implements Initializable {
 
     }
 
-
+/*
     @FXML
     void acquistaBiglietto(MouseEvent event) {
         Spettacolo s=filmList.getSelectionModel().getSelectedItem();
         quantitaPostiField.setText();
     }
+
+ */
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -127,11 +127,12 @@ public class AcquistaController implements Initializable {
         filmList.setItems(spettacoliMostrati);
     }
 
+    /*
     @FXML
     void creaAbbonamento(MouseEvent event) {
         Abbonamento abbonamento=new Abbonamento(92346,abbonamentoDatePicker.getValue());
         this.abbonamentoAttivoLabel.setText("Hai 1 abbonamento attivo! Data di scadenza: "+
                 abbonamento.getDataAttivazione().plusDays(90).toString());
-    }
+    }*/
 
 }

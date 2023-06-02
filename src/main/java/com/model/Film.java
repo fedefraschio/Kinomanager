@@ -12,6 +12,11 @@ public class Film {
 
     }
 
+    public Film(String titolo)
+    {
+        this(titolo,"-");
+    }
+
     public String getTitolo() {
         return titolo;
     }

@@ -9,6 +9,8 @@ public class Spettacolo {
     private Sala sala;
     private LocalTime orario;
     private LocalDate data;
+    private String titoloFilm; //attributo extra per riempire le table
+    private int numeroSala;//attributo extra per riempire le table
 
     public Spettacolo(GiornoDellaSettimana giornoDellaSettimana, Film film, Sala sala, LocalDate data, LocalTime orario) {
         this.giornoDellaSettimana = giornoDellaSettimana;
@@ -16,6 +18,8 @@ public class Spettacolo {
         this.sala = sala;
         this.data=data;
         this.orario = orario;
+        this.titoloFilm=this.film.getTitolo();
+        this.numeroSala=this.sala.getNumeroSala();
     }
 
     public GiornoDellaSettimana getGiornoDellaSettimana() {
@@ -58,9 +62,19 @@ public class Spettacolo {
         this.data = data;
     }
 
-    //metodo extra per acquistare biglietti
-    public void acquistaBiglietti(int numeroBigliettiComprati)
-    {
+    public String getTitoloFilm() {
+        return titoloFilm;
+    }
 
+    public void setTitoloFilm(String titoloFilm) {
+        this.titoloFilm = titoloFilm;
+    }
+
+    public int getNumeroSala() {
+        return numeroSala;
+    }
+
+    public void setNumeroSala(int numeroSala) {
+        this.numeroSala = numeroSala;
     }
 }
