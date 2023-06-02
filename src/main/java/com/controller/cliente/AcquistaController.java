@@ -52,7 +52,7 @@ public class AcquistaController implements Initializable {
     private ComboBox<String> filmComboBox;
 
     @FXML
-    private ListView<Spettacolo> filmList;
+    private ListView<String> filmList;
 
     @FXML
     private TextField postiTextField;
@@ -91,14 +91,28 @@ public class AcquistaController implements Initializable {
 
     }
 
-/*
+
     @FXML
     void acquistaBiglietto(MouseEvent event) {
-        Spettacolo s=filmList.getSelectionModel().getSelectedItem();
-        quantitaPostiField.setText();
+        String[] parametri=filmList.getSelectionModel().getSelectedItem().split(";");
+        Spettacolo spettacolo=new Spettacolo();
+        for(Spettacolo s:listSpettacoli)
+        {
+            if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
+                    s.getNumeroSala()==Integer.parseInt(parametri[1]) &&
+                    s.getData().isEqual(LocalDate.parse(parametri[3])) &&
+                    s.getOrario().equals(LocalTime.parse(parametri[4])))
+            {
+                spettacolo=s;
+                break;
+            }
+        }
+        int bigliettiAcquistati=Integer.parseInt(quantitaPostiField.getText());
+        spettacolo.getSala().acquistaBiglietti(bigliettiAcquistati);
+        postiTextField.setText(String.valueOf(spettacolo.getSala().getPostiRimanenti()));
     }
 
- */
+
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -115,24 +129,44 @@ public class AcquistaController implements Initializable {
     void cercaBiglietto(MouseEvent event) {
         String titolo=filmComboBox.getSelectionModel().getSelectedItem();
         LocalDate data=bigliettoDatePicker.getValue();
-        ObservableList<Spettacolo> spettacoliMostrati=FXCollections.observableArrayList();
+        ObservableList<String> spettacoliMostrati=FXCollections.observableArrayList();
         for(Spettacolo s:listSpettacoli)
         {
             if(s.getFilm().getTitolo().equalsIgnoreCase(titolo) &&
             s.getData().isEqual(data))
             {
-                spettacoliMostrati.add(s);
+                spettacoliMostrati.add(s.toString());
             }
         }
         filmList.setItems(spettacoliMostrati);
     }
 
-    /*
+
     @FXML
     void creaAbbonamento(MouseEvent event) {
         Abbonamento abbonamento=new Abbonamento(92346,abbonamentoDatePicker.getValue());
         this.abbonamentoAttivoLabel.setText("Hai 1 abbonamento attivo! Data di scadenza: "+
                 abbonamento.getDataAttivazione().plusDays(90).toString());
-    }*/
+
+
+    }
+
+    @FXML
+    void rowClicked(MouseEvent event) {
+        String[] parametri=filmList.getSelectionModel().getSelectedItem().split(";");
+        Spettacolo spettacolo=new Spettacolo();
+        for(Spettacolo s:listSpettacoli)
+        {
+            if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
+            s.getNumeroSala()==Integer.parseInt(parametri[1]) &&
+            s.getData().isEqual(LocalDate.parse(parametri[3])) &&
+            s.getOrario().equals(LocalTime.parse(parametri[4])))
+            {
+                spettacolo=s;
+                break;
+            }
+        }
+        postiTextField.setText(String.valueOf(spettacolo.getSala().getPostiRimanenti()));
+    }
 
 }

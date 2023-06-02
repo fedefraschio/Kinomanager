@@ -21,6 +21,10 @@ public class Spettacolo {
         this.titoloFilm=this.film.getTitolo();
         this.numeroSala=this.sala.getNumeroSala();
     }
+    public Spettacolo() //costruttore util
+    {
+        this(GiornoDellaSettimana.Lunedì,new Film("Ciao"),new Sala(1),LocalDate.now(),LocalTime.now());
+    }
 
     public GiornoDellaSettimana getGiornoDellaSettimana() {
         return giornoDellaSettimana;
@@ -76,5 +80,11 @@ public class Spettacolo {
 
     public void setNumeroSala(int numeroSala) {
         this.numeroSala = numeroSala;
+    }
+
+    public String toString()
+    {
+        return this.titoloFilm + " ; " +this.numeroSala+ " ; " +this.giornoDellaSettimana+ " ; " +
+                this.data+ " ; " +this.orario;
     }
 }

@@ -5,7 +5,6 @@ module com {
 
     opens com.model;
     exports com.model;
-    opens com.controller;
     exports com.controller.gestore;
     opens com.controller.gestore;
     exports com.controller.cliente;

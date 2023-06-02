@@ -39,7 +39,7 @@ public class Posto {
 	}
 
 
-	private void setFree(boolean isFree) {
+	public void setFree(boolean isFree) {
 		this.isFree = isFree;
 	}
 	

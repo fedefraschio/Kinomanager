@@ -17,7 +17,22 @@ public class Sala {
 
     public Sala(int numeroSala) //specifico solo il numero della sala, il resto è standard
     {
-        this(200,numeroSala,new ArrayList<Posto>());
+        this.numeroPosti = 200;
+        this.numeroSala = numeroSala;
+        List<Posto> listaPosti=new ArrayList<Posto>();
+        int numPosto=1;
+        int fila=1;
+        for(int i=0;i<numeroPosti;i++)
+        {
+            if(numPosto==20)
+            {
+                numPosto=1;
+                fila++;
+            }
+            listaPosti.add(new Posto(numPosto,fila));
+            numPosto++;
+        }
+        this.listaPosti = new ArrayList<>(listaPosti);
     }
 
     public int getNumeroPosti() {
@@ -44,7 +59,7 @@ public class Sala {
         this.listaPosti = new ArrayList<>(listaPosti);
     }
 
-    private int getPostiRimanenti()
+    public int getPostiRimanenti()
     {
         int result=0;
         for(Posto p:listaPosti)
@@ -53,5 +68,20 @@ public class Sala {
                 result++;
         }
         return result;
+    }
+
+    public void acquistaBiglietti(int numBiglietti) //aggiorna il numero di posti disponibili
+    {
+        int count=0;
+        for(Posto p:this.listaPosti)
+        {
+            if(count==numBiglietti)
+                break;
+            if(p.isFree())
+            {
+                p.setFree(false);
+                count++;
+            }
+        }
     }
 }
