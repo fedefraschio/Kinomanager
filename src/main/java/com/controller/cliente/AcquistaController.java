@@ -64,27 +64,28 @@ public class AcquistaController implements Initializable {
     private Scene scene;
     private Parent root;
 
-    Film f1=new Film("Fast X","Azione");
-    Film f2=new Film("Love Again","Romantico");
-    Film f3=new Film("Borromini e Bernini","Storico");
 
 
-    Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-            new Film("Fast X","Azione"), new Sala(5,200),
-            LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(21,00));
-    Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-            new Film("Love Again","Romantico"), new Sala(4,50),
-            LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(15,30));
-    Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
-            new Film("Borromini e Bernini","Storico"), new Sala(1,25),
-            LocalDate.of(2023, Month.JUNE, 21), LocalTime.of(21,00));
-
-    ObservableList<Spettacolo> listSpettacoli=FXCollections.observableArrayList(s1,s2,s3);
-
+    ObservableList<Spettacolo> listSpettacoli;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Film f1=new Film("Fast X","Azione");
+        Film f2=new Film("Love Again","Romantico");
+        Film f3=new Film("Borromini e Bernini","Storico");
 
+
+        Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
+                new Film("Fast X","Azione"), new Sala(5,200),
+                LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(21,00));
+        Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
+                new Film("Love Again","Romantico"), new Sala(4,50),
+                LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(15,30));
+        Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
+                new Film("Borromini e Bernini","Storico"), new Sala(1,25),
+                LocalDate.of(2023, Month.JUNE, 21), LocalTime.of(21,00));
+
+        listSpettacoli=FXCollections.observableArrayList(s1,s2,s3);
         //viene riempita la combobox di film
         filmComboBox.setItems(FXCollections.observableArrayList(f1.getTitolo(),f2.getTitolo(),f3.getTitolo()));
 
@@ -95,24 +96,28 @@ public class AcquistaController implements Initializable {
     @FXML
     void acquistaBiglietto(MouseEvent event) {
         String[] parametri=filmList.getSelectionModel().getSelectedItem().split(" ; ");
-        System.out.println("debug 0"+parametri[0]+" "+Integer.parseInt(parametri[1])+" "+LocalDate.parse(parametri[3])+" "
-        +LocalTime.parse(parametri[4]));
+        ObservableList<Spettacolo> newListSpettacoli=FXCollections.observableArrayList();
         for(Spettacolo s:listSpettacoli)
         {
-
             if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
                     s.getNumeroSala()==Integer.parseInt(parametri[1]) &&
                     s.getData().isEqual(LocalDate.parse(parametri[3])) &&
                     s.getOrario().equals(LocalTime.parse(parametri[4]))) {
-
                 int bigliettiDaAcquistare = Integer.parseInt(quantitaPostiField.getText());
-                System.out.println("debug1 "+bigliettiDaAcquistare);
                 s.acquistaBiglietti(bigliettiDaAcquistare);
-                System.out.println("debug2 "+s.getSala().getPostiRimanenti());
-                postiTextField.setText(String.valueOf(s.getSala().getPostiRimanenti()));
-                break;
+                postiTextField.clear();
+                quantitaPostiField.clear();
             }
+
+                newListSpettacoli.add(s);
+
         }
+        filmComboBox.setValue(null);
+        bigliettoDatePicker.setValue(null);
+        filmList.setItems(null);
+        listSpettacoli.clear();
+        listSpettacoli.addAll(newListSpettacoli);
+
     }
 
 
@@ -158,8 +163,7 @@ public class AcquistaController implements Initializable {
 
     @FXML
     void rowClicked(MouseEvent event) {
-        String[] parametri=filmList.getSelectionModel().getSelectedItem().split(";");
-        Spettacolo spettacolo=new Spettacolo();
+        String[] parametri=filmList.getSelectionModel().getSelectedItem().split(" ; ");
         for(Spettacolo s:listSpettacoli)
         {
             if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
@@ -167,11 +171,11 @@ public class AcquistaController implements Initializable {
             s.getData().isEqual(LocalDate.parse(parametri[3])) &&
             s.getOrario().equals(LocalTime.parse(parametri[4])))
             {
-                spettacolo=s;
+                postiTextField.setText(Integer.toString(s.getSala().getPostiRimanenti()));
                 break;
             }
         }
-        postiTextField.setText(String.valueOf(spettacolo.getSala().getPostiRimanenti()));
+
     }
 
 }
