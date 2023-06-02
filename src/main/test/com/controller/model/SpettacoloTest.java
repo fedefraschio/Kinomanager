@@ -1,9 +1,9 @@
 package com.controller.model;
 
-import com.model.Film;
-import com.model.GiornoDellaSettimana;
-import com.model.Sala;
-import com.model.Spettacolo;
+import model.Film;
+import model.GiornoDellaSettimana;
+import model.Sala;
+import model.Spettacolo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

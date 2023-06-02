@@ -3,13 +3,13 @@ module com {
     requires javafx.fxml;
 
 
-    opens com.model;
-    exports com.model;
-    exports com.controller.gestore;
-    opens com.controller.gestore;
-    exports com.controller.cliente;
-    opens com.controller.cliente;
-    exports com.app to javafx.graphics;
-    opens com.app;
+    opens model;
+    exports model;
+    exports controller.gestore;
+    opens controller.gestore;
+    exports controller.cliente;
+    opens controller.cliente;
+    exports app to javafx.graphics;
+    opens app;
 
 }
