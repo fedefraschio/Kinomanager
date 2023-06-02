@@ -87,13 +87,13 @@ public class GestioneProgrammazioneController implements Initializable{
 
 	//dati per la tabella
    	Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-			new Film("Fast X","Azione"), new Sala(5),
+			new Film("Fast X","Azione"), new Sala(5,200),
 			LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(21,00));
 	Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-			new Film("Love Again","Romantico"), new Sala(4),
+			new Film("Love Again","Romantico"), new Sala(4,100),
 			LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(15,30));
 	Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
-			new Film("Borromini e Bernini","Storico"), new Sala(1),
+			new Film("Borromini e Bernini","Storico"), new Sala(1,50),
 			LocalDate.of(2023, Month.JUNE, 21), LocalTime.of(21,00));
     
     ObservableList<Spettacolo> list=FXCollections.observableArrayList(s1,s2,s3);

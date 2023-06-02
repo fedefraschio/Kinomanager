@@ -15,11 +15,23 @@ public class Sala {
         this.listaPosti = new ArrayList<>(listaPosti);
     }
 
-    public Sala(int numeroSala) //specifico solo il numero della sala, il resto è standard
+    public Sala(int numeroSala, List<Posto> listaPosti)
     {
-        this.numeroPosti = 200;
+        this.numeroSala=numeroSala;
+        this.listaPosti=new ArrayList<>(listaPosti);
+        this.numeroPosti=this.listaPosti.size();
+    }
+
+    public Sala(int numeroSala)
+    {
+        this(numeroSala,100);
+    }
+
+    public Sala(int numeroSala, int numeroPosti) //specifico solo il numero della sala, il resto è standard
+    {
+        this.numeroPosti = numeroPosti;
         this.numeroSala = numeroSala;
-        List<Posto> listaPosti=new ArrayList<Posto>();
+        this.listaPosti=new ArrayList<Posto>();
         int numPosto=1;
         int fila=1;
         for(int i=0;i<numeroPosti;i++)
@@ -32,14 +44,14 @@ public class Sala {
             listaPosti.add(new Posto(numPosto,fila));
             numPosto++;
         }
-        this.listaPosti = new ArrayList<>(listaPosti);
     }
+
 
     public int getNumeroPosti() {
         return numeroPosti;
     }
 
-    private void setNumeroPosti(int numeroPosti) {
+    public void setNumeroPosti(int numeroPosti) {
         this.numeroPosti = numeroPosti;
     }
 
@@ -59,29 +71,43 @@ public class Sala {
         this.listaPosti = new ArrayList<>(listaPosti);
     }
 
+
     public int getPostiRimanenti()
     {
-        int result=0;
+        int postiLiberi=0;
         for(Posto p:listaPosti)
         {
             if(p.isFree())
-                result++;
+                postiLiberi++;
         }
-        return result;
+        return postiLiberi;
     }
 
-    public void acquistaBiglietti(int numBiglietti) //aggiorna il numero di posti disponibili
+
+    public int occupaPosti(int numeroPosti) //occupa i primi -numeroPosti- posti liberi
     {
-        int count=0;
-        for(Posto p:this.listaPosti)
+        int result=0;
+        if(this.getPostiRimanenti()-numeroPosti<0)
         {
-            if(count==numBiglietti)
-                break;
-            if(p.isFree())
+            result=-1;
+        }
+        else //aggiorno i posti e il numero di posti
+        {
+            //ho abbastanza posti, ciclo finchè non raggiungo quel numero
+            int index=0;
+            for(Posto p:this.listaPosti)
             {
-                p.setFree(false);
-                count++;
+                if(result==numeroPosti)
+                    break;
+                if(p.isFree())
+                {
+                    p.setFree(false);
+                    result++;
+                    this.numeroPosti--;
+                }
+
             }
         }
+        return result;
     }
 }

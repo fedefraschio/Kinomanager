@@ -23,7 +23,7 @@ public class Spettacolo {
     }
     public Spettacolo() //costruttore util
     {
-        this(GiornoDellaSettimana.Lunedì,new Film("Ciao"),new Sala(1),LocalDate.now(),LocalTime.now());
+        this(GiornoDellaSettimana.Lunedì,new Film("Ciao"),new Sala(1,200),LocalDate.now(),LocalTime.now());
     }
 
     public GiornoDellaSettimana getGiornoDellaSettimana() {
@@ -87,4 +87,11 @@ public class Spettacolo {
         return this.titoloFilm + " ; " +this.numeroSala+ " ; " +this.giornoDellaSettimana+ " ; " +
                 this.data+ " ; " +this.orario;
     }
+
+    public int acquistaBiglietti(int numBiglietti)
+    {
+        return this.sala.occupaPosti(numBiglietti);
+    }
+
+
 }
