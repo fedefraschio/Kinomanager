@@ -1,27 +1,27 @@
-package com.util;
+package com.model;
 
 import java.time.LocalDate;
 
-public class RigaSconto {
+public class Sconto { //classe non presente nel dominio
 
-    private int sconto;
+    private int percentuale;
     private String eta;
     private LocalDate inizio;
     private LocalDate fine;
 
-    public RigaSconto(int sconto, String eta, LocalDate inizio, LocalDate fine) {
-        this.sconto = sconto;
+    public Sconto(int percentuale, String eta, LocalDate inizio, LocalDate fine) {
+        this.percentuale = percentuale;
         this.eta = eta;
         this.inizio = inizio;
         this.fine = fine;
     }
 
-    public int getSconto() {
-        return sconto;
+    public int getPercentuale() {
+        return percentuale;
     }
 
-    public void setSconto(int sconto) {
-        this.sconto = sconto;
+    public void setPercentuale(int percentuale) {
+        this.percentuale = percentuale;
     }
 
     public String getEta() {

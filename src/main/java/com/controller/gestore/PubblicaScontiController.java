@@ -7,7 +7,7 @@ import java.time.Month;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.util.RigaSconto;
+import com.model.Sconto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,25 +33,25 @@ public class PubblicaScontiController implements Initializable{
     private DatePicker dataStart;
 
     @FXML
-    private TableColumn<RigaSconto, String> eta;
+    private TableColumn<Sconto, String> eta;
 
     @FXML
     private ComboBox<String> etaBox;
 
     @FXML
-    private TableColumn<RigaSconto, Date> fine;
+    private TableColumn<Sconto, Date> fine;
 
     @FXML
-    private TableColumn<RigaSconto, Date> inizio;
+    private TableColumn<Sconto, Date> inizio;
 
     @FXML
     private Button pubblica;
 
     @FXML
-    private TableView<RigaSconto> scontiTab;
+    private TableView<Sconto> scontiTab;
 
     @FXML
-    private TableColumn<RigaSconto, Integer> sconto;
+    private TableColumn<Sconto, Integer> sconto;
 
     @FXML
     private TextField scontoText;
@@ -60,11 +60,11 @@ public class PubblicaScontiController implements Initializable{
 	private Scene scene; 
 	private Parent root;
 
-    RigaSconto s1=new RigaSconto(50,"Sotto i 5 anni",
+    Sconto s1=new Sconto(50,"Sotto i 5 anni",
             LocalDate.of(2023, Month.JUNE,01),LocalDate.of(2023,Month.JUNE,30));
-    RigaSconto s2=new RigaSconto(10,"11 - 13 anni",
+    Sconto s2=new Sconto(10,"11 - 13 anni",
             LocalDate.of(2023,Month.JUNE,01),LocalDate.of(2023,Month.AUGUST,31));
-    ObservableList<RigaSconto> list=FXCollections.observableArrayList(
+    ObservableList<Sconto> list=FXCollections.observableArrayList(
             s1,s2);
 
     @FXML
@@ -81,11 +81,11 @@ public class PubblicaScontiController implements Initializable{
     @FXML
     void submit(MouseEvent e)
     {
-        RigaSconto rigaSconto =new RigaSconto(Integer.parseInt(scontoText.getText()),
+        Sconto rigaSconto =new Sconto(Integer.parseInt(scontoText.getText()),
                 etaBox.getValue(),
                 dataStart.getValue(),
                 dataEnd.getValue());
-        ObservableList<RigaSconto> righe=scontiTab.getItems();
+        ObservableList<Sconto> righe=scontiTab.getItems();
         righe.add(rigaSconto);
         scontiTab.setItems(righe);
 
@@ -99,10 +99,10 @@ public class PubblicaScontiController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		etaBox.setItems(FXCollections.observableArrayList("Sotto i 5 anni","6 - 10 anni",
                 "11 - 13 anni","14 - 16 anni"));
-		sconto.setCellValueFactory(new PropertyValueFactory<RigaSconto,Integer>("sconto"));
-        eta.setCellValueFactory(new PropertyValueFactory<RigaSconto,String>("eta"));
-        inizio.setCellValueFactory(new PropertyValueFactory<RigaSconto,Date>("inizio"));
-        fine.setCellValueFactory(new PropertyValueFactory<RigaSconto,Date>("fine"));
+		sconto.setCellValueFactory(new PropertyValueFactory<Sconto,Integer>("percentuale"));
+        eta.setCellValueFactory(new PropertyValueFactory<Sconto,String>("eta"));
+        inizio.setCellValueFactory(new PropertyValueFactory<Sconto,Date>("inizio"));
+        fine.setCellValueFactory(new PropertyValueFactory<Sconto,Date>("fine"));
 
         scontiTab.setItems(list);
 	}
