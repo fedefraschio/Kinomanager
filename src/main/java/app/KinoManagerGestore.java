@@ -16,7 +16,7 @@ public class KinoManagerGestore extends Application {
 
 	    public void start(Stage primaryStage) throws Exception{
 
-			Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/controller/gestore/ViewLoginGestore.fxml")));
+			Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/gestore/ViewLoginGestore.fxml")));
 
 			primaryStage.setTitle("KinoManager");
 

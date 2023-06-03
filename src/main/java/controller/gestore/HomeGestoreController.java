@@ -43,7 +43,7 @@ public class HomeGestoreController {
 	
 	public void toSconti(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/gestore/ViewPubblicaSconti.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/ViewPubblicaSconti.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -54,7 +54,7 @@ public class HomeGestoreController {
 	
 	public void toProgrammazione(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/gestore/ViewGestioneProgrammazione.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/ViewGestioneProgrammazione.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -65,7 +65,7 @@ public class HomeGestoreController {
 	
 	public void toPrezzi(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/gestore/ViewImpostaPrezzi.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/ViewImpostaPrezzi.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -76,7 +76,7 @@ public class HomeGestoreController {
 	
 	public void toAggiungiCassiere(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/gestore/ViewAggiungiCassiere.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/ViewAggiungiCassiere.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -87,7 +87,7 @@ public class HomeGestoreController {
 	
 	public void toRimuoviCassiere(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/gestore/ViewRimuoviCassiere.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/ViewRimuoviCassiere.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();

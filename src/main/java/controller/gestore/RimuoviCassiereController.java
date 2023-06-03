@@ -60,7 +60,7 @@ public class RimuoviCassiereController implements Initializable {
 
     @FXML
     void back(MouseEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/gestore/HomeGestore.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/HomeGestore.fxml"));
         root=loader.load();
 
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();

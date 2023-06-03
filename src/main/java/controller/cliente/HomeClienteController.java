@@ -37,7 +37,7 @@ public class HomeClienteController {
 	
 	public void toAcquista(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/cliente/ViewAcquista.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cliente/ViewAcquista.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -48,7 +48,7 @@ public class HomeClienteController {
 	
 	public void toProgrammazione(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/cliente/ViewMostraProgrammazione.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cliente/ViewMostraProgrammazione.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -59,7 +59,7 @@ public class HomeClienteController {
 	
 	public void toRecensioni(MouseEvent event) throws IOException
 	{
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/cliente/ViewRecensioni.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cliente/ViewRecensioni.fxml"));
 		root=loader.load();
 		
 		stage=(Stage)((Node)event.getSource()).getScene().getWindow();

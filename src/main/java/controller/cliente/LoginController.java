@@ -38,7 +38,7 @@ public class LoginController {
 		
 		if(username.contentEquals(usernameTest) && password.contentEquals(passwordTest))
 		{
-			FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/cliente/HomeCliente.fxml"));
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cliente/HomeCliente.fxml"));
 			root=loader.load();
 			HomeClienteController homeClienteController=loader.getController();
 			

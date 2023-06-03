@@ -72,7 +72,7 @@ public class MostraProgrammazioneController implements Initializable {
 
     @FXML
     void back(MouseEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/controller/cliente/HomeCliente.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cliente/HomeCliente.fxml"));
         root=loader.load();
 
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
