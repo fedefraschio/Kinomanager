@@ -9,6 +9,8 @@ module com {
     opens controller.gestore;
     exports controller.cliente;
     opens controller.cliente;
+    exports controller.cassiere;
+    opens controller.cassiere;
     exports app to javafx.graphics;
     opens app;
 

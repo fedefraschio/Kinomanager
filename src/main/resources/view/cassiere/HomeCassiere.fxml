@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.cassiere.HomeCassiereController">
    <children>
       <AnchorPane prefHeight="421.0" prefWidth="600.0">
          <children>
-            <Button layoutX="232.0" layoutY="235.0" mnemonicParsing="false" text="Aggiungi cliente" />
-            <Button layoutX="148.0" layoutY="200.0" mnemonicParsing="false" text="Vendita abbonamento" />
+            <Button fx:id="toAggiungiClienteButton" layoutX="232.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#toAggiungiCliente" text="Aggiungi cliente" />
+            <Button fx:id="toVendiAbbonamentoButton" layoutX="148.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#toVendiAbbonamento" text="Vendita abbonamento" />
             <Text layoutX="300.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KINOMANAGER">
                <font>
                   <Font name="Yu Gothic Regular" size="36.0" />
                </font>
             </Text>
-            <Button layoutX="114.0" layoutY="161.0" mnemonicParsing="false" text="Vendita biglietti" />
-            <Button layoutX="287.0" layoutY="271.0" mnemonicParsing="false" text="Rimuovi cliente" />
+            <Button fx:id="toVendiButton" layoutX="114.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#toVendiBiglietto" text="Vendita biglietti" />
+            <Button fx:id="toRimuoviClienteButton" layoutX="287.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#toRimuoviCliente" text="Rimuovi cliente" />
+            <Label fx:id="nameLabel" layoutX="150.0" layoutY="94.0" prefHeight="18.0" prefWidth="0.0" />
          </children>
       </AnchorPane>
    </children>

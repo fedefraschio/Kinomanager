@@ -2,32 +2,33 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.cassiere.VenditaAbbonamentoController">
    <children>
       <AnchorPane prefHeight="421.0" prefWidth="600.0">
          <children>
-            <Button layoutX="274.0" layoutY="303.0" mnemonicParsing="false" text="Attiva" />
+            <Button fx:id="attivaButton" layoutX="274.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#attiva" text="Attiva" />
             <Text layoutX="166.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KINOMANAGER">
                <font>
                   <Font name="Yu Gothic Regular" size="36.0" />
                </font>
             </Text>
             <Text layoutX="212.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendi un abbonamento al cliente" />
-            <Text layoutX="176.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nessun abbonamento attivo trovato.">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Text>
             <Text layoutX="79.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuovo abbonamento:" />
-            <DatePicker layoutX="79.0" layoutY="208.0" promptText="Scegli una data:" />
-            <TextField layoutX="359.0" layoutY="208.0" promptText="Username cliente" />
+            <DatePicker fx:id="abbonamentoDatePicker" layoutX="79.0" layoutY="208.0" promptText="Scegli una data:" />
+            <TextField fx:id="usernameText" layoutX="359.0" layoutY="208.0" promptText="Username cliente" />
+            <Button fx:id="backButton" layoutX="479.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#back" text="Ritorna alla Home" />
+            <Label fx:id="resultLabel" layoutX="199.0" layoutY="131.0" prefHeight="22.0" prefWidth="0.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
