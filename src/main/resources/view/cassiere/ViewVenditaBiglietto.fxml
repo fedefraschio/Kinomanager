@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,37 +11,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cassiere.VenditaBigliettoController">
    <children>
       <AnchorPane prefHeight="415.0" prefWidth="600.0">
          <children>
-            <TextField layoutX="264.0" layoutY="354.0" promptText="Username cliente" />
+            <TextField fx:id="usernameTextBox" layoutX="184.0" layoutY="354.0" promptText="Username cliente" />
             <Text layoutX="166.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KINOMANAGER">
                <font>
                   <Font name="Yu Gothic Regular" size="36.0" />
                </font>
             </Text>
             <Text layoutX="166.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendi biglietti ad un cliente" textAlignment="CENTER" wrappingWidth="267.943359375" />
-            <MenuButton layoutX="59.0" layoutY="121.0" mnemonicParsing="false" text="Film">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
-            <MenuButton layoutX="156.0" layoutY="121.0" mnemonicParsing="false" text="Giorno della settimana">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
-            <TextArea layoutX="308.0" layoutY="209.0" prefHeight="125.0" prefWidth="268.0" />
-            <Button layoutX="349.0" layoutY="121.0" mnemonicParsing="false" text="Cerca" />
+            <TextArea fx:id="postiDisponibiliTextArea" layoutX="308.0" layoutY="209.0" prefHeight="125.0" prefWidth="268.0" />
+            <Button fx:id="cercaButton" layoutX="523.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#cerca" text="Cerca" />
             <Text layoutX="306.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Posti disponibili:" />
-            <Button layoutX="434.0" layoutY="354.0" mnemonicParsing="false" text="Vendi" />
-            <TextField layoutX="105.0" layoutY="354.0" promptText="Posti scelti" />
-            <TextArea layoutX="22.0" layoutY="209.0" prefHeight="125.0" prefWidth="268.0" />
+            <Button fx:id="vendiButton" layoutX="348.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#vendi" text="Vendi" />
+            <TextField fx:id="postiSceltiTexBox" layoutX="22.0" layoutY="354.0" promptText="Posti scelti" />
             <Text layoutX="22.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spettacoli trovati:" />
+            <Button fx:id="backButton" layoutX="488.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#back" text="Torna alla Home" />
+            <ComboBox fx:id="filmComboBox" layoutX="22.0" layoutY="121.0" prefHeight="26.0" prefWidth="164.0" promptText="Film" />
+            <DatePicker fx:id="dataDatePicker" layoutX="247.0" layoutY="121.0" promptText="Data" />
+            <ListView fx:id="filmTrovatiListView" layoutX="22.0" layoutY="210.0" onMouseClicked="#rowClicked" prefHeight="126.0" prefWidth="250.0" />
          </children>
       </AnchorPane>
    </children>
