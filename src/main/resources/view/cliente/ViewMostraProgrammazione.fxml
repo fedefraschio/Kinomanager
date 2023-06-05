@@ -20,10 +20,9 @@
             <TableView fx:id="programmazione" layoutX="28.0" layoutY="48.0" prefHeight="296.0" prefWidth="606.0">
                <columns>
                   <TableColumn fx:id="titolo" prefWidth="150.4000244140625" text="Titolo" />
-                  <TableColumn fx:id="sala" minWidth="0.0" prefWidth="107.20001220703125" text="Sala" />
-                  <TableColumn fx:id="giornoDellaSettimana" minWidth="2.4000244140625" prefWidth="95.20001220703125" text="Giorno" />
-                  <TableColumn fx:id="ora" minWidth="0.0" prefWidth="102.39996337890625" text="Ora" />
-                  <TableColumn fx:id="data" minWidth="0.0" prefWidth="150.4000244140625" text="Data" />
+                  <TableColumn fx:id="sala" minWidth="0.0" prefWidth="142.4000244140625" text="Sala" />
+                  <TableColumn fx:id="giornoDellaSettimana" minWidth="2.4000244140625" prefWidth="151.199951171875" text="Giorno" />
+                  <TableColumn fx:id="ora" minWidth="0.0" prefWidth="160.80001831054688" text="Ora" />
                </columns>
             </TableView>
             <Text layoutX="194.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KINOMANAGER" wrappingWidth="299.13671875">

@@ -35,7 +35,8 @@ public class VenditaBigliettoController implements Initializable {
     private ComboBox<String> filmComboBox;
 
     @FXML
-    private DatePicker dataDatePicker;
+    private ComboBox<GiornoDellaSettimana> giornoComboBox;
+
 
     @FXML
     private TextArea postiDisponibiliTextArea;
@@ -63,15 +64,16 @@ public class VenditaBigliettoController implements Initializable {
 
     Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
             new Film("Fast X","Azione"), new Sala(5,200),
-            LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(21,00));
+            LocalTime.of(21, 0));
     Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
             new Film("Love Again","Romantico"), new Sala(4,50),
-            LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(15,30));
+            LocalTime.of(15,30));
     Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
             new Film("Borromini e Bernini","Storico"), new Sala(1,25),
-            LocalDate.of(2023, Month.JUNE, 21), LocalTime.of(21,00));
+            LocalTime.of(21, 0));
 
     ObservableList<Spettacolo> listSpettacoli;
+    ObservableList<GiornoDellaSettimana> giorni;
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -89,12 +91,12 @@ public class VenditaBigliettoController implements Initializable {
         postiDisponibiliTextArea.clear();
         postiSceltiTexBox.clear();
         String titolo=filmComboBox.getSelectionModel().getSelectedItem();
-        LocalDate data=dataDatePicker.getValue();
+        GiornoDellaSettimana giorno=giornoComboBox.getSelectionModel().getSelectedItem();
         ObservableList<String> spettacoliMostrati=FXCollections.observableArrayList();
         for(Spettacolo s:listSpettacoli)
         {
             if(s.getFilm().getTitolo().equalsIgnoreCase(titolo) &&
-                    s.getData().isEqual(data))
+                    s.getGiornoDellaSettimana().equals(giorno))
             {
                 spettacoliMostrati.add(s.toString());
             }
@@ -110,8 +112,8 @@ public class VenditaBigliettoController implements Initializable {
         {
             if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
                     s.getNumeroSala()==Integer.parseInt(parametri[1]) &&
-                    s.getData().isEqual(LocalDate.parse(parametri[3])) &&
-                    s.getOrario().equals(LocalTime.parse(parametri[4]))) {
+                    s.getGiornoDellaSettimana().equals(GiornoDellaSettimana.getGiornoDaString(parametri[2])) &&
+                    s.getOrario().equals(LocalTime.parse(parametri[3]))) {
                 int bigliettiDaAcquistare = Integer.parseInt(postiSceltiTexBox.getText());
                 s.acquistaBiglietti(bigliettiDaAcquistare);
                 postiSceltiTexBox.clear();
@@ -122,7 +124,7 @@ public class VenditaBigliettoController implements Initializable {
 
         }
         filmComboBox.setValue(null);
-        dataDatePicker.setValue(null);
+        giornoComboBox.setValue(null);
         filmTrovatiListView.setItems(null);
         listSpettacoli.clear();
         listSpettacoli.addAll(newListSpettacoli);
@@ -132,8 +134,11 @@ public class VenditaBigliettoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listSpettacoli= FXCollections.observableArrayList(s1,s2,s3);
-        //viene riempita la combobox di film
+        giorni=FXCollections.observableArrayList(GiornoDellaSettimana.Lunedì,GiornoDellaSettimana.Martedì,
+        GiornoDellaSettimana.Mercoledì,GiornoDellaSettimana.Giovedì,GiornoDellaSettimana.Venerdì,
+                GiornoDellaSettimana.Sabato,GiornoDellaSettimana.Domenica);
         filmComboBox.setItems(FXCollections.observableArrayList(f1.getTitolo(),f2.getTitolo(),f3.getTitolo()));
+        giornoComboBox.setItems(FXCollections.observableArrayList(giorni));
     }
 
     @FXML
@@ -143,8 +148,8 @@ public class VenditaBigliettoController implements Initializable {
         {
             if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
                     s.getNumeroSala()==Integer.parseInt(parametri[1]) &&
-                    s.getData().isEqual(LocalDate.parse(parametri[3])) &&
-                    s.getOrario().equals(LocalTime.parse(parametri[4])))
+                    s.getGiornoDellaSettimana().equals(GiornoDellaSettimana.getGiornoDaString(parametri[2])) &&
+                    s.getOrario().equals(LocalTime.parse(parametri[3])))
             {
                 postiDisponibiliTextArea.setText(Integer.toString(s.getSala().getPostiRimanenti()));
                 break;

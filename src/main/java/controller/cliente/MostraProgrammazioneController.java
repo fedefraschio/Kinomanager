@@ -33,9 +33,6 @@ public class MostraProgrammazioneController implements Initializable {
     private Button back;
 
     @FXML
-    private TableColumn<Spettacolo, LocalDate> data;
-
-    @FXML
     private TableColumn<Spettacolo, GiornoDellaSettimana> giornoDellaSettimana;
 
     @FXML
@@ -54,18 +51,18 @@ public class MostraProgrammazioneController implements Initializable {
     private Scene scene;
     private Parent root;
 
-    Comparator<Spettacolo> spettacoloComparator= Comparator.comparing(Spettacolo::getData).
+    Comparator<Spettacolo> spettacoloComparator= Comparator.comparing(Spettacolo::getGiornoDellaSettimana).
             thenComparing(Spettacolo::getOrario).thenComparing(Spettacolo::getNumeroSala);
 
     Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
             new Film("Fast X","Azione"), new Sala(5,200),
-            LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(21,00));
+             LocalTime.of(21, 0));
     Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
             new Film("Love Again","Romantico"), new Sala(4,100),
-            LocalDate.of(2023, Month.JUNE, 23), LocalTime.of(15,30));
+             LocalTime.of(15,30));
     Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
             new Film("Borromini e Bernini","Storico"), new Sala(1,50),
-            LocalDate.of(2023, Month.JUNE, 21), LocalTime.of(21,00));
+             LocalTime.of(21, 0));
 
     ObservableList<Spettacolo> list= FXCollections.observableArrayList(s1,s2,s3);
 
@@ -87,7 +84,6 @@ public class MostraProgrammazioneController implements Initializable {
         titolo.setCellValueFactory(new PropertyValueFactory<Spettacolo, String>("titoloFilm"));
         sala.setCellValueFactory(new PropertyValueFactory<Spettacolo, Integer>("numeroSala"));
         giornoDellaSettimana.setCellValueFactory(new PropertyValueFactory<Spettacolo,GiornoDellaSettimana>("giornoDellaSettimana"));
-        data.setCellValueFactory(new PropertyValueFactory<Spettacolo, LocalDate>("data"));
         ora.setCellValueFactory(new PropertyValueFactory<Spettacolo, LocalTime>("orario"));
         programmazione.setItems(list);
         list.sort(spettacoloComparator);
