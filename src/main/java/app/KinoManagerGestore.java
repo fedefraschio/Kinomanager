@@ -18,7 +18,7 @@ public class KinoManagerGestore extends Application {
 
 			Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/gestore/ViewLoginGestore.fxml")));
 
-			primaryStage.setTitle("KinoManager");
+			primaryStage.setTitle("KinoManager - Gestore");
 
 			primaryStage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/logoWithoutName.png"))));
 

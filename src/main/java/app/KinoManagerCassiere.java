@@ -18,7 +18,7 @@ public class KinoManagerCassiere extends Application {
 
 			Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/cassiere/ViewLoginCassiere.fxml")));
 
-			primaryStage.setTitle("KinoManager");
+			primaryStage.setTitle("KinoManager - Cassiere");
 
 			primaryStage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/logoWithoutName.png"))));
 

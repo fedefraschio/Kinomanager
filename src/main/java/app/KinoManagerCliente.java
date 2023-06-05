@@ -18,7 +18,7 @@ public class KinoManagerCliente extends Application {
 
 			Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/cliente/ViewLoginCliente.fxml")));
 
-			primaryStage.setTitle("KinoManager");
+			primaryStage.setTitle("KinoManager - Cliente");
 
 			primaryStage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/logoWithoutName.png"))));
 
