@@ -31,7 +31,7 @@ public class Sala {
     {
         this.numeroPosti = numeroPosti;
         this.numeroSala = numeroSala;
-        this.listaPosti=new ArrayList<Posto>();
+        this.listaPosti= new ArrayList<>();
         int numPosto=1;
         int fila=1;
         for(int i=0;i<numeroPosti;i++)

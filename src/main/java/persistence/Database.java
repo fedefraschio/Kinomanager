@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Database {
@@ -13,10 +14,16 @@ public class Database {
 
     //attributi accessibili ai vari controller
     private String usernameUtenteAttuale;
-    private ObservableList<Cassiere> cassieri;
-    private ObservableList<Cliente> clienti;
-    private ObservableList<Spettacolo> spettacoli;
-    private List<Abbonamento> abbonamenti;
+    private final ObservableList<Cassiere> cassieri;
+    private final ObservableList<Cliente> clienti;
+    private final List<Gestore> gestori;
+    private final ObservableList<Spettacolo> spettacoli;
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+    private final List<Abbonamento> abbonamenti;
+    Comparator<Spettacolo> spettacoliComparator;
+    private float prezzoBiglietto;
+    private float prezzoAbbonamento;
+    private final ObservableList<Sconto> sconti;
     //
     private Database()
     {
@@ -24,6 +31,10 @@ public class Database {
         this.clienti=FXCollections.observableArrayList();
         this.spettacoli=FXCollections.observableArrayList();
         this.abbonamenti=new ArrayList<>();
+        this.gestori=new ArrayList<>();
+        this.spettacoliComparator= Comparator.comparing(Spettacolo::getGiornoDellaSettimana).
+                thenComparing(Spettacolo::getOrario).thenComparing(Spettacolo::getNumeroSala);
+        this.sconti=FXCollections.observableArrayList();
     }
 
     public static Database getInstance()
@@ -103,6 +114,53 @@ public class Database {
         this.abbonamenti.add(abbonamento);
     }
 
+    public List<Gestore> getGestori()
+    {
+        return gestori;
+    }
 
+    public void removeCassiere(int index) {
+        this.cassieri.remove(index);
+    }
 
+    public void addGestore(Gestore gestore)
+    {
+        this.gestori.add(gestore);
+    }
+
+    public void removeSpettacolo(int index)
+    {
+        this.spettacoli.remove(index);
+    }
+
+    public void sortSpettacoli()
+    {
+        this.spettacoli.sort(spettacoliComparator);
+    }
+
+    public void setPrezzoBiglietto(float prezzoBiglietto) {
+        this.prezzoBiglietto = prezzoBiglietto;
+    }
+
+    public void setPrezzoAbbonamento(float prezzoAbbonamento) {
+        this.prezzoAbbonamento = prezzoAbbonamento;
+    }
+
+    public float getPrezzoBiglietto() {
+        return prezzoBiglietto;
+    }
+
+    public float getPrezzoAbbonamento() {
+        return prezzoAbbonamento;
+    }
+
+    public ObservableList<Sconto> getSconti()
+    {
+        return sconti;
+    }
+
+    public void addSconto(Sconto sconto)
+    {
+        this.sconti.add(sconto);
+    }
 }

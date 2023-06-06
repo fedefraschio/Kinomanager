@@ -34,14 +34,6 @@ public class Programmazione {
         this.spettacoli.add(spettacolo);
     }
 
-//    public void addSpettacolo(String titolo, String genere, int numSala, int anno, int mese, int giorno, int ora, int minuti)
-//    {
-//        ProcessHandle LocalDateTime;
-//        this.spettacoli.add(new Spettacolo(new Film(titolo,genere),
-//                new Sala(numSala),
-//                LocalDateTime.of(anno,mese,giorno,ora,minuti)));
-//    }
-
     public Spettacolo getSpettacolo(int i){
         if( i >= this.spettacoli.size()){
             return null;

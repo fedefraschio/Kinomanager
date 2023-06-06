@@ -8,18 +8,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import model.*;
+import model.Cliente;
+import model.GiornoDellaSettimana;
+import model.Spettacolo;
 import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.ResourceBundle;
 
 public class VenditaBigliettoController implements Initializable {

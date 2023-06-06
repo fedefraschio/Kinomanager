@@ -66,9 +66,6 @@ public class KinoManagerCassiere extends Application {
 			data.addCliente(b2);
 			data.addCliente(defaultCliente);
 
-			Film f1=new Film("Fast X","Azione");
-			Film f2=new Film("Love Again","Romantico");
-			Film f3=new Film("Borromini e Bernini","Storico");
 			Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
 					new Film("Fast X","Azione"), new Sala(5,200),
 					LocalTime.of(21, 0));

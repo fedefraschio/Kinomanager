@@ -1,10 +1,7 @@
 package controller.cassiere;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,11 +15,8 @@ import model.Cliente;
 import persistence.Database;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Random;
-import java.util.ResourceBundle;
 
 public class VenditaAbbonamentoController{
 

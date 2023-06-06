@@ -26,6 +26,7 @@ public class Abbonamento {
         return dataAttivazione;
     }
 
+
     public void setDataAttivazione(LocalDate dataAttivazione) {
         this.dataAttivazione = dataAttivazione;
     }
