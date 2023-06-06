@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.cassiere.HomeCassiereController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cassiere.HomeCassiereController">
    <children>
       <AnchorPane prefHeight="421.0" prefWidth="600.0">
          <children>
@@ -20,7 +20,7 @@
             </Text>
             <Button fx:id="toVendiButton" layoutX="114.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#toVendiBiglietto" text="Vendita biglietti" />
             <Button fx:id="toRimuoviClienteButton" layoutX="287.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#toRimuoviCliente" text="Rimuovi cliente" />
-            <Label fx:id="nameLabel" layoutX="150.0" layoutY="94.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="nameLabel" layoutX="108.0" layoutY="94.0" prefHeight="18.0" prefWidth="460.0" />
          </children>
       </AnchorPane>
    </children>

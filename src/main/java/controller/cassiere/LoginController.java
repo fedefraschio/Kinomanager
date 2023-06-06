@@ -33,7 +33,7 @@ public class LoginController {
 	{
 		String username=usernameField.getText();
 		String password=passwordField.getText();
-		System.out.println("debug "+username+" "+password);
+
 
 		boolean found=false;
 		for(Cassiere c:data.getCassieri())
@@ -50,8 +50,6 @@ public class LoginController {
 		{
 			FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cassiere/HomeCassiere.fxml"));
 			Parent root = loader.load();
-			HomeCassiereController homeCassiereController=loader.getController();
-			homeCassiereController.displayName();
 
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);

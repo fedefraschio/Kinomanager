@@ -13,6 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Cassiere;
+import model.Cliente;
+import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,22 +25,22 @@ import java.util.ResourceBundle;
 public class AggiungiClienteController implements Initializable {
 
     @FXML
-    private TableColumn<Cassiere, String> cognome;
+    private TableColumn<Cliente, String> cognome;
 
     @FXML
-    private TableColumn<Cassiere, LocalDate> data;
+    private TableColumn<Cliente, LocalDate> data;
 
     @FXML
-    private TableColumn<Cassiere, String> email;
+    private TableColumn<Cliente, String> email;
 
     @FXML
-    private TableColumn<Cassiere, String> nome;
+    private TableColumn<Cliente, String> nome;
 
     @FXML
-    private TableColumn<Cassiere, String> password;
+    private TableColumn<Cliente, String> password;
 
     @FXML
-    private TableView<Cassiere> table;
+    private TableView<Cliente> table;
 
     @FXML
     private TextField textBoxCognome;
@@ -59,9 +61,10 @@ public class AggiungiClienteController implements Initializable {
     private TextField textBoxUsername;
 
     @FXML
-    private TableColumn<Cassiere, String> username;
+    private TableColumn<Cliente, String> username;
 
-    ObservableList<Cassiere> list;
+    ObservableList<Cliente> list;
+    Database datas= Database.getInstance();
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -76,15 +79,14 @@ public class AggiungiClienteController implements Initializable {
 
     @FXML
     void submit() {
-        Cassiere cassiere =new Cassiere(textBoxUsername.getText(),
+        Cliente cliente =new Cliente(textBoxUsername.getText(),
                 textBoxEmail.getText(),textBoxNome.getText(),
                 textBoxCognome.getText(),
                 textBoxDataDiNascita.getValue(),
                 textBoxPassword.getText());
 
-        ObservableList<Cassiere> righe=table.getItems();
-        righe.add(cassiere);
-        table.setItems(righe);
+        datas.addCliente(cliente);
+        table.refresh();
 
         textBoxUsername.clear();
         textBoxEmail.clear();
@@ -104,11 +106,6 @@ public class AggiungiClienteController implements Initializable {
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         cognome.setCellValueFactory(new PropertyValueFactory<>("cognome"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
-        Cassiere c1=new Cassiere("Mark123","marcoverdi@gmail.com","Marco","Verdi",
-                LocalDate.of(1980, Month.AUGUST, 1),"password1234");
-        Cassiere c2=new Cassiere("ClaraX","Clara_Bianchi@gmail.com","Clara","Bianchi",
-                LocalDate.of(1995,Month.DECEMBER,14),"Psw98");
-        list= FXCollections.observableArrayList(c1,c2);
-        table.setItems(list);
+        table.setItems(datas.getClienti());
     }
 }

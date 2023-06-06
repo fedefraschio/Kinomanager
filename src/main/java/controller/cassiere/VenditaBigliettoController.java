@@ -8,13 +8,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import model.Film;
-import model.GiornoDellaSettimana;
-import model.Sala;
-import model.Spettacolo;
+import model.*;
+import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,7 +30,6 @@ public class VenditaBigliettoController implements Initializable {
     @FXML
     private ComboBox<GiornoDellaSettimana> giornoComboBox;
 
-
     @FXML
     private TextArea postiDisponibiliTextArea;
 
@@ -44,8 +42,7 @@ public class VenditaBigliettoController implements Initializable {
     @FXML
     private TextField usernameTextBox;
 
-    ObservableList<Spettacolo> listSpettacoli;
-    ObservableList<GiornoDellaSettimana> giorni;
+    Database data= Database.getInstance();
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -65,7 +62,7 @@ public class VenditaBigliettoController implements Initializable {
         String titolo=filmComboBox.getSelectionModel().getSelectedItem();
         GiornoDellaSettimana giorno=giornoComboBox.getSelectionModel().getSelectedItem();
         ObservableList<String> spettacoliMostrati=FXCollections.observableArrayList();
-        for(Spettacolo s:listSpettacoli)
+        for(Spettacolo s:data.getSpettacoli())
         {
             if(s.getFilm().getTitolo().equalsIgnoreCase(titolo) &&
                     s.getGiornoDellaSettimana().equals(giorno))
@@ -79,58 +76,65 @@ public class VenditaBigliettoController implements Initializable {
     @FXML
     void vendi() {
         String[] parametri=filmTrovatiListView.getSelectionModel().getSelectedItem().split(" ; ");
-        ObservableList<Spettacolo> newListSpettacoli=FXCollections.observableArrayList();
-        for(Spettacolo s:listSpettacoli)
+        for(Spettacolo s: data.getSpettacoli())
         {
             if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
                     s.getNumeroSala()==Integer.parseInt(parametri[1]) &&
                     s.getGiornoDellaSettimana().equals(GiornoDellaSettimana.getGiornoDaString(parametri[2])) &&
                     s.getOrario().equals(LocalTime.parse(parametri[3]))) {
                 int bigliettiDaAcquistare = Integer.parseInt(postiSceltiTexBox.getText());
-                s.acquistaBiglietti(bigliettiDaAcquistare);
-                postiSceltiTexBox.clear();
-                postiDisponibiliTextArea.clear();
+                String username=usernameTextBox.getText();
+                //controllo che il cliente esista prima di vendere
+                boolean clienteFound=false;
+                for(Cliente c:data.getClienti())
+                {
+                    if(c.getUsername().equalsIgnoreCase(username))
+                    {
+                        clienteFound=true;
+                        break;
+                    }
+                }
+                if(!clienteFound)
+                {
+
+                    postiDisponibiliTextArea.setText("Cliente non trovato!");
+                }
+                else
+                {
+                    //provo a vendere
+                    if(data.acquistaBiglietti(bigliettiDaAcquistare,s)>0)
+                    {
+                        postiSceltiTexBox.clear();
+                        postiDisponibiliTextArea.clear();
+                    }
+                    else
+                    {
+                        postiDisponibiliTextArea.setText("Posti insufficienti!");
+                    }
+                }
+                break;
             }
-
-            newListSpettacoli.add(s);
-
         }
         filmComboBox.setValue(null);
         giornoComboBox.setValue(null);
         filmTrovatiListView.setItems(null);
-        listSpettacoli.clear();
-        listSpettacoli.addAll(newListSpettacoli);
         usernameTextBox.clear();
+        postiSceltiTexBox.clear();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Film f1=new Film("Fast X","Azione");
-        Film f2=new Film("Love Again","Romantico");
-        Film f3=new Film("Borromini e Bernini","Storico");
-
-
-        Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-                new Film("Fast X","Azione"), new Sala(5,200),
-                LocalTime.of(21, 0));
-        Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-                new Film("Love Again","Romantico"), new Sala(4,50),
-                LocalTime.of(15,30));
-        Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
-                new Film("Borromini e Bernini","Storico"), new Sala(1,25),
-                LocalTime.of(21, 0));
-        listSpettacoli= FXCollections.observableArrayList(s1,s2,s3);
-        giorni=FXCollections.observableArrayList(GiornoDellaSettimana.Lunedì,GiornoDellaSettimana.Martedì,
+        ObservableList<GiornoDellaSettimana> giorni=FXCollections.observableArrayList(GiornoDellaSettimana.Lunedì,GiornoDellaSettimana.Martedì,
         GiornoDellaSettimana.Mercoledì,GiornoDellaSettimana.Giovedì,GiornoDellaSettimana.Venerdì,
                 GiornoDellaSettimana.Sabato,GiornoDellaSettimana.Domenica);
-        filmComboBox.setItems(FXCollections.observableArrayList(f1.getTitolo(),f2.getTitolo(),f3.getTitolo()));
-        giornoComboBox.setItems(FXCollections.observableArrayList(giorni));
+        filmComboBox.setItems(data.getTitoliSpettacoli());
+        giornoComboBox.setItems(giorni);
     }
 
     @FXML
     void rowClicked() {
         String[] parametri=filmTrovatiListView.getSelectionModel().getSelectedItem().split(" ; ");
-        for(Spettacolo s:listSpettacoli)
+        for(Spettacolo s: data.getSpettacoli())
         {
             if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
                     s.getNumeroSala()==Integer.parseInt(parametri[1]) &&

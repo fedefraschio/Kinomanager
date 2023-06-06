@@ -13,15 +13,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Abbonamento;
 import model.Cliente;
+import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Random;
 import java.util.ResourceBundle;
 
-public class VenditaAbbonamentoController implements Initializable{
+public class VenditaAbbonamentoController{
 
     @FXML
     private DatePicker abbonamentoDatePicker;
@@ -32,19 +35,21 @@ public class VenditaAbbonamentoController implements Initializable{
     @FXML
     private TextField usernameText;
 
-    ObservableList<Cliente> list;
+    Database datas= Database.getInstance();
 
     @FXML
     void attiva() {
         int found=0;
         String username=usernameText.getText();
         LocalDate data=abbonamentoDatePicker.getValue();
-        for(Cliente c:list)
+        for(Cliente c:datas.getClienti())
         {
             if (c.getUsername().equalsIgnoreCase(username))
             {
                 resultLabel.setText("Abbonamento attivato per "+username+" - Scadenza: "+data.plusDays(90));
                 found++;
+                Random r=new Random();
+                datas.addAbbonamento(new Abbonamento(r.nextInt(1000),data));
                 break;
             }
         }
@@ -67,13 +72,4 @@ public class VenditaAbbonamentoController implements Initializable{
         stage.show();
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        Cliente c1=new Cliente("Mark123","marcoverdi@gmail.com","Marco","Verdi",
-                LocalDate.of(1980, Month.AUGUST, 1),"password1234");
-        Cliente c2=new Cliente("ClaraX","Clara_Bianchi@gmail.com","Clara","Bianchi",
-                LocalDate.of(1995,Month.DECEMBER,14),"Psw98");
-        list= FXCollections.observableArrayList(c1,c2);
-    }
 }

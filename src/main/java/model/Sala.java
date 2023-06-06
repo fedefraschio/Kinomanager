@@ -94,7 +94,6 @@ public class Sala {
         else //aggiorno i posti e il numero di posti
         {
             //ho abbastanza posti, ciclo finchè non raggiungo quel numero
-            int index=0;
             for(Posto p:this.listaPosti)
             {
                 if(result==numeroPosti)
