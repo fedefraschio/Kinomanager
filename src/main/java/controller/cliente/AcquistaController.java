@@ -1,6 +1,5 @@
 package controller.cliente;
 
-import model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -32,22 +30,10 @@ public class AcquistaController implements Initializable {
     private Text abbonamentoAttivoLabel;
 
     @FXML
-    private Button abbonamentoButton;
-
-    @FXML
     private DatePicker abbonamentoDatePicker;
 
     @FXML
-    private Button acquistaBigliettoButton;
-
-    @FXML
-    private Button back;
-
-    @FXML
     private ComboBox<GiornoDellaSettimana> giornoComboBox;
-
-    @FXML
-    private Button cercaBigliettoButton;
 
     @FXML
     private ComboBox<String> filmComboBox;
@@ -60,11 +46,6 @@ public class AcquistaController implements Initializable {
 
     @FXML
     private TextField quantitaPostiField;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
 
 
     ObservableList<Spettacolo> listSpettacoli;
@@ -99,7 +80,7 @@ public class AcquistaController implements Initializable {
 
 
     @FXML
-    void acquistaBiglietto(MouseEvent event) {
+    void acquistaBiglietto() {
         String[] parametri=filmList.getSelectionModel().getSelectedItem().split(" ; ");
         ObservableList<Spettacolo> newListSpettacoli=FXCollections.observableArrayList();
         for(Spettacolo s:listSpettacoli)
@@ -130,16 +111,16 @@ public class AcquistaController implements Initializable {
     @FXML
     void back(MouseEvent event) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cliente/HomeCliente.fxml"));
-        root=loader.load();
+        Parent root = loader.load();
 
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    void cercaBiglietto(MouseEvent event) {
+    void cercaBiglietto() {
         postiTextField.clear();
         quantitaPostiField.clear();
         String titolo=filmComboBox.getSelectionModel().getSelectedItem();
@@ -158,16 +139,16 @@ public class AcquistaController implements Initializable {
 
 
     @FXML
-    void creaAbbonamento(MouseEvent event) {
+    void creaAbbonamento() {
         Abbonamento abbonamento=new Abbonamento(92346,abbonamentoDatePicker.getValue());
         this.abbonamentoAttivoLabel.setText("Hai 1 abbonamento attivo! Data di scadenza: "+
-                abbonamento.getDataAttivazione().plusDays(90).toString());
+                abbonamento.getDataAttivazione().plusDays(90));
 
 
     }
 
     @FXML
-    void rowClicked(MouseEvent event) {
+    void rowClicked() {
         String[] parametri=filmList.getSelectionModel().getSelectedItem().split(" ; ");
         for(Spettacolo s:listSpettacoli)
         {

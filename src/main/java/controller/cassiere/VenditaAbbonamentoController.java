@@ -8,13 +8,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import model.Cassiere;
 import model.Cliente;
 
 import java.io.IOException;
@@ -23,16 +21,10 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ResourceBundle;
 
-public class VenditaAbbonamentoController {
+public class VenditaAbbonamentoController implements Initializable{
 
     @FXML
     private DatePicker abbonamentoDatePicker;
-
-    @FXML
-    private Button attivaButton;
-
-    @FXML
-    private Button backButton;
 
     @FXML
     private Label resultLabel;
@@ -40,19 +32,10 @@ public class VenditaAbbonamentoController {
     @FXML
     private TextField usernameText;
 
-    Cliente c1=new Cliente("Mark123","marcoverdi@gmail.com","Marco","Verdi",
-            LocalDate.of(1980, Month.AUGUST,01),"password1234");
-    Cliente c2=new Cliente("ClaraX","Clara_Bianchi@gmail.com","Clara","Bianchi",
-            LocalDate.of(1995,Month.DECEMBER,14),"Psw98");
-    ObservableList<Cliente> list= FXCollections.observableArrayList(
-            c1,c2);
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    ObservableList<Cliente> list;
 
     @FXML
-    void attiva(MouseEvent event) {
+    void attiva() {
         int found=0;
         String username=usernameText.getText();
         LocalDate data=abbonamentoDatePicker.getValue();
@@ -76,13 +59,21 @@ public class VenditaAbbonamentoController {
     @FXML
     void back(MouseEvent event) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cassiere/HomeCassiere.fxml"));
-        root=loader.load();
+        Parent root = loader.load();
 
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Cliente c1=new Cliente("Mark123","marcoverdi@gmail.com","Marco","Verdi",
+                LocalDate.of(1980, Month.AUGUST, 1),"password1234");
+        Cliente c2=new Cliente("ClaraX","Clara_Bianchi@gmail.com","Clara","Bianchi",
+                LocalDate.of(1995,Month.DECEMBER,14),"Psw98");
+        list= FXCollections.observableArrayList(c1,c2);
+    }
 }

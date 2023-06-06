@@ -5,30 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HomeCassiereController {
-
-	@FXML
-	private Label nameLabel;
-
-	@FXML
-	private Button toAggiungiClienteButton;
-
-	@FXML
-	private Button toRimuoviClienteButton;
-
-	@FXML
-	private Button toVendiAbbonamentoButton;
-
-	@FXML
-	private Button toVendiButton;
-
+	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -77,6 +60,6 @@ public class HomeCassiereController {
 		stage.show();
 	}
 
-	public void displayName(String username) {
+	public void displayName() {
 	}
 }

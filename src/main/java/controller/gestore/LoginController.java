@@ -22,29 +22,24 @@ public class LoginController {
 	
 	@FXML
 	Label errorLabel;
-	
-	private Stage stage;
-	private Scene scene; 
-	private Parent root;
-	
-	private String usernameTest="Mario";
-	private String passwordTest="Rossi";
-	
+
 	public void eseguiVerificaCredenziali(MouseEvent event) throws IOException
 	{
 		String username=usernameField.getText();
 		String password=passwordField.getText();
-		
+
+		String usernameTest = "Mario";
+		String passwordTest = "Rossi";
 		if(username.contentEquals(usernameTest) && password.contentEquals(passwordTest))
 		{
 			FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/HomeGestore.fxml"));
-			root=loader.load();
+			Parent root = loader.load();
 			HomeGestoreController homeGestoreController=loader.getController();
 			
 			homeGestoreController.displayName(username);
-			
-			stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-			scene=new Scene(root);
+
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}

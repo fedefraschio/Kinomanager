@@ -22,12 +22,6 @@ import java.util.ResourceBundle;
 public class RimuoviCassiereController implements Initializable {
 
     @FXML
-    private Button rimuovi;
-
-    @FXML
-    private Button buttonback;
-
-    @FXML
     private TableColumn<Cassiere, String> cognome;
 
     @FXML
@@ -47,30 +41,22 @@ public class RimuoviCassiereController implements Initializable {
 
     @FXML
     private TableColumn<Cassiere, String> username;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
-    Cassiere c1=new Cassiere("Mark123","marcoverdi@gmail.com","Marco","Verdi",
-            LocalDate.of(1980, Month.AUGUST,01),"password1234");
-    Cassiere c2=new Cassiere("ClaraX","Clara_Bianchi@gmail.com","Clara","Bianchi",
-            LocalDate.of(1995,Month.DECEMBER,14),"Psw98");
-    ObservableList<Cassiere> list= FXCollections.observableArrayList(
-            c1,c2);
+    ObservableList<Cassiere> list;
 
     @FXML
     void back(MouseEvent event) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/HomeGestore.fxml"));
-        root=loader.load();
+        Parent root = loader.load();
 
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    void remove(MouseEvent event) {
+    void remove() {
         int selectedID=table.getSelectionModel().getSelectedIndex();
         table.getItems().remove(selectedID);
 
@@ -79,12 +65,17 @@ public class RimuoviCassiereController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        username.setCellValueFactory(new PropertyValueFactory<Cassiere, String>("username"));
-        email.setCellValueFactory(new PropertyValueFactory<Cassiere, String>("email"));
-        data.setCellValueFactory(new PropertyValueFactory<Cassiere,LocalDate>("data"));
-        nome.setCellValueFactory(new PropertyValueFactory<Cassiere, String>("nome"));
-        cognome.setCellValueFactory(new PropertyValueFactory<Cassiere, String>("cognome"));
-        password.setCellValueFactory(new PropertyValueFactory<Cassiere,String>("password"));
+        username.setCellValueFactory(new PropertyValueFactory<>("username"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        data.setCellValueFactory(new PropertyValueFactory<>("data"));
+        nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        cognome.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+        password.setCellValueFactory(new PropertyValueFactory<>("password"));
+        Cassiere c1=new Cassiere("Mark123","marcoverdi@gmail.com","Marco","Verdi",
+                LocalDate.of(1980, Month.AUGUST, 1),"password1234");
+        Cassiere c2=new Cassiere("ClaraX","Clara_Bianchi@gmail.com","Clara","Bianchi",
+                LocalDate.of(1995,Month.DECEMBER,14),"Psw98");
+        list= FXCollections.observableArrayList(c1,c2);
         table.setItems(list);
     }
 }

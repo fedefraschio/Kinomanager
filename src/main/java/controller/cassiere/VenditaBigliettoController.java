@@ -26,12 +26,6 @@ import java.util.ResourceBundle;
 public class VenditaBigliettoController implements Initializable {
 
     @FXML
-    private Button backButton;
-
-    @FXML
-    private Button cercaButton;
-
-    @FXML
     private ComboBox<String> filmComboBox;
 
     @FXML
@@ -50,44 +44,22 @@ public class VenditaBigliettoController implements Initializable {
     @FXML
     private TextField usernameTextBox;
 
-    @FXML
-    private Button vendiButton;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
-    Film f1=new Film("Fast X","Azione");
-    Film f2=new Film("Love Again","Romantico");
-    Film f3=new Film("Borromini e Bernini","Storico");
-
-
-    Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-            new Film("Fast X","Azione"), new Sala(5,200),
-            LocalTime.of(21, 0));
-    Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-            new Film("Love Again","Romantico"), new Sala(4,50),
-            LocalTime.of(15,30));
-    Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
-            new Film("Borromini e Bernini","Storico"), new Sala(1,25),
-            LocalTime.of(21, 0));
-
     ObservableList<Spettacolo> listSpettacoli;
     ObservableList<GiornoDellaSettimana> giorni;
 
     @FXML
     void back(MouseEvent event) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cassiere/HomeCassiere.fxml"));
-        root=loader.load();
+        Parent root = loader.load();
 
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    void cerca(MouseEvent event) {
+    void cerca() {
         postiDisponibiliTextArea.clear();
         postiSceltiTexBox.clear();
         String titolo=filmComboBox.getSelectionModel().getSelectedItem();
@@ -105,7 +77,7 @@ public class VenditaBigliettoController implements Initializable {
     }
 
     @FXML
-    void vendi(MouseEvent event) {
+    void vendi() {
         String[] parametri=filmTrovatiListView.getSelectionModel().getSelectedItem().split(" ; ");
         ObservableList<Spettacolo> newListSpettacoli=FXCollections.observableArrayList();
         for(Spettacolo s:listSpettacoli)
@@ -133,6 +105,20 @@ public class VenditaBigliettoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Film f1=new Film("Fast X","Azione");
+        Film f2=new Film("Love Again","Romantico");
+        Film f3=new Film("Borromini e Bernini","Storico");
+
+
+        Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
+                new Film("Fast X","Azione"), new Sala(5,200),
+                LocalTime.of(21, 0));
+        Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
+                new Film("Love Again","Romantico"), new Sala(4,50),
+                LocalTime.of(15,30));
+        Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
+                new Film("Borromini e Bernini","Storico"), new Sala(1,25),
+                LocalTime.of(21, 0));
         listSpettacoli= FXCollections.observableArrayList(s1,s2,s3);
         giorni=FXCollections.observableArrayList(GiornoDellaSettimana.Lunedì,GiornoDellaSettimana.Martedì,
         GiornoDellaSettimana.Mercoledì,GiornoDellaSettimana.Giovedì,GiornoDellaSettimana.Venerdì,
@@ -142,7 +128,7 @@ public class VenditaBigliettoController implements Initializable {
     }
 
     @FXML
-    void rowClicked(MouseEvent event) {
+    void rowClicked() {
         String[] parametri=filmTrovatiListView.getSelectionModel().getSelectedItem().split(" ; ");
         for(Spettacolo s:listSpettacoli)
         {

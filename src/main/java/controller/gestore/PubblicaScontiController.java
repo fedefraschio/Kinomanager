@@ -24,9 +24,6 @@ import javafx.stage.Stage;
 public class PubblicaScontiController implements Initializable{
 
     @FXML
-    private Button backButton;
-
-    @FXML
     private DatePicker dataEnd;
 
     @FXML
@@ -45,9 +42,6 @@ public class PubblicaScontiController implements Initializable{
     private TableColumn<Sconto, Date> inizio;
 
     @FXML
-    private Button pubblica;
-
-    @FXML
     private TableView<Sconto> scontiTab;
 
     @FXML
@@ -55,31 +49,22 @@ public class PubblicaScontiController implements Initializable{
 
     @FXML
     private TextField scontoText;
-    
-    private Stage stage;
-	private Scene scene; 
-	private Parent root;
 
-    Sconto s1=new Sconto(50,"Sotto i 5 anni",
-            LocalDate.of(2023, Month.JUNE,01),LocalDate.of(2023,Month.JUNE,30));
-    Sconto s2=new Sconto(10,"11 - 13 anni",
-            LocalDate.of(2023,Month.JUNE,01),LocalDate.of(2023,Month.AUGUST,31));
-    ObservableList<Sconto> list=FXCollections.observableArrayList(
-            s1,s2);
+    ObservableList<Sconto> list;
 
     @FXML
     void back(MouseEvent event) throws IOException {
     	FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/HomeGestore.fxml"));
-		root=loader.load();
-		
-		stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-		scene=new Scene(root);
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}
     
     @FXML
-    void submit(MouseEvent e)
+    void submit()
     {
         Sconto rigaSconto =new Sconto(Integer.parseInt(scontoText.getText()),
                 etaBox.getValue(),
@@ -99,11 +84,16 @@ public class PubblicaScontiController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		etaBox.setItems(FXCollections.observableArrayList("Sotto i 5 anni","6 - 10 anni",
                 "11 - 13 anni","14 - 16 anni"));
-		sconto.setCellValueFactory(new PropertyValueFactory<Sconto,Integer>("percentuale"));
-        eta.setCellValueFactory(new PropertyValueFactory<Sconto,String>("eta"));
-        inizio.setCellValueFactory(new PropertyValueFactory<Sconto,Date>("inizio"));
-        fine.setCellValueFactory(new PropertyValueFactory<Sconto,Date>("fine"));
+		sconto.setCellValueFactory(new PropertyValueFactory<>("percentuale"));
+        eta.setCellValueFactory(new PropertyValueFactory<>("eta"));
+        inizio.setCellValueFactory(new PropertyValueFactory<>("inizio"));
+        fine.setCellValueFactory(new PropertyValueFactory<>("fine"));
 
+        Sconto s1=new Sconto(50,"Sotto i 5 anni",
+                LocalDate.of(2023, Month.JUNE, 1),LocalDate.of(2023,Month.JUNE,30));
+        Sconto s2=new Sconto(10,"11 - 13 anni",
+                LocalDate.of(2023,Month.JUNE, 1),LocalDate.of(2023,Month.AUGUST,31));
+        list=FXCollections.observableArrayList(s1,s2);
         scontiTab.setItems(list);
 	}
     
