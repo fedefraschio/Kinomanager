@@ -23,13 +23,13 @@ public class SpettacoloTest {
     {
         s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
                 new Film("Fast X","Azione"), new Sala(5,200),
-                 LocalTime.of(21,00));
+                 LocalTime.of(21, 0));
         s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
                 new Film("Love Again","Romantico"), new Sala(4,50),
                  LocalTime.of(15,30));
         s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
                 new Film("Borromini e Bernini","Storico"), new Sala(1,25),
-                 LocalTime.of(21,00));
+                 LocalTime.of(21, 0));
     }
 
     @Test
