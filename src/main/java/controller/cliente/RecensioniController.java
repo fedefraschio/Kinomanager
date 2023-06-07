@@ -1,7 +1,5 @@
 package controller.cliente;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Film;
 import model.Recensione;
+import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +36,7 @@ public class RecensioniController implements Initializable {
     @FXML
     private TextField valutazioneTextBox;
 
-    ObservableList<Recensione> list;
+    Database data=Database.getInstance();
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -53,7 +52,7 @@ public class RecensioniController implements Initializable {
     @FXML
     void cercaRecensioni() {
         recensioniTextArea.clear();
-        for(Recensione r: list)
+        for(Recensione r: data.getRecensioni())
         {
             if(r.getFilm().getTitolo().equalsIgnoreCase(filmComboBox.getSelectionModel().getSelectedItem()))
             {
@@ -69,7 +68,7 @@ public class RecensioniController implements Initializable {
         Film film=new Film(filmVistiComboBox.getSelectionModel().getSelectedItem());
         String commento=commentoTextArea.getText();
         Recensione r=new Recensione(commento,valutazione,film);
-        list.add(r);
+        data.addRecensione(r);
         filmVistiComboBox.setValue(null);
         valutazioneTextBox.clear();
         commentoTextArea.clear();
@@ -78,12 +77,8 @@ public class RecensioniController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        filmComboBox.setItems(FXCollections.observableArrayList("Fast X",
-                "Bernini e Borromini","Me contro Te: il film"));
-        filmVistiComboBox.setItems(FXCollections.observableArrayList("Fast X",
-                "Bernini e Borromini","Me contro Te: il film"));
-        Recensione r1=new Recensione("Super topperia missile",5,new Film("Me contro Te: Il Film"));
-        Recensione r2=new Recensione("Anvedi che monnezza",1,new Film("Fast X"));
-        list= FXCollections.observableArrayList(r1,r2);
+        filmComboBox.setItems(data.getTitoliSpettacoli());
+        filmVistiComboBox.setItems(data.getTitoliSpettacoli());
+
     }
 }

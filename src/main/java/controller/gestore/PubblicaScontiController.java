@@ -1,15 +1,6 @@
 package controller.gestore;
 
-import java.io.IOException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.Date;
-import java.util.ResourceBundle;
-
-import model.Sconto;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Sconto;
 import persistence.Database;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Date;
+import java.util.ResourceBundle;
 
 public class PubblicaScontiController implements Initializable{
 

@@ -1,6 +1,5 @@
 package controller.gestore;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,9 +10,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import model.Cassiere;
 import model.Gestore;
 import persistence.Database;
+
+import java.io.IOException;
 
 public class LoginController {
 

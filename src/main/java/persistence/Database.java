@@ -24,6 +24,7 @@ public class Database {
     private float prezzoBiglietto;
     private float prezzoAbbonamento;
     private final ObservableList<Sconto> sconti;
+    private final ObservableList<Recensione> recensioni;
     //
     private Database()
     {
@@ -35,6 +36,7 @@ public class Database {
         this.spettacoliComparator= Comparator.comparing(Spettacolo::getGiornoDellaSettimana).
                 thenComparing(Spettacolo::getOrario).thenComparing(Spettacolo::getNumeroSala);
         this.sconti=FXCollections.observableArrayList();
+        this.recensioni=FXCollections.observableArrayList();
     }
 
     public static Database getInstance()
@@ -163,4 +165,16 @@ public class Database {
     {
         this.sconti.add(sconto);
     }
+
+    public ObservableList<Recensione> getRecensioni()
+    {
+        return recensioni;
+    }
+
+    public void addRecensione(Recensione recensione)
+    {
+        this.recensioni.add(recensione);
+    }
+
+
 }

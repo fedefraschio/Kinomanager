@@ -23,10 +23,7 @@ import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class GestioneProgrammazioneController implements Initializable{

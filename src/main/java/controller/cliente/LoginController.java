@@ -11,6 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Cliente;
+import persistence.Database;
 
 import java.io.IOException;
 
@@ -21,37 +23,46 @@ public class LoginController {
 
 	@FXML
 	private PasswordField passwordField;
-	
+
 	@FXML
 	Label errorLabel;
+
+	Database data= Database.getInstance();
 
 	public void eseguiVerificaCredenziali(MouseEvent event) throws IOException
 	{
 		String username=usernameField.getText();
 		String password=passwordField.getText();
 
-		String usernameTest = "Mario";
-		String passwordTest = "Rossi";
-		if(username.contentEquals(usernameTest) && password.contentEquals(passwordTest))
+
+		boolean found=false;
+		for(Cliente c:data.getClienti())
+		{
+			if(c.getUsername().equalsIgnoreCase(username) &&
+					c.getPassword().equals(password))
+			{
+				found=true;
+				data.setUsernameUtenteAttuale(c.getUsername());
+				break;
+			}
+		}
+		if(found)
 		{
 			FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/cliente/HomeCliente.fxml"));
 			Parent root = loader.load();
-			HomeClienteController homeClienteController=loader.getController();
-			homeClienteController.displayName(username);
 
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}
-		
 		else
 		{
 			errorLabel.setText("Errore! Username o password errati.");
 			usernameField.clear();
 			passwordField.clear();
 		}
-		
+
 	}
-	
+
 }
