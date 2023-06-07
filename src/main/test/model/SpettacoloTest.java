@@ -1,4 +1,4 @@
-package com.controller.model;
+package model;
 
 import model.Film;
 import model.GiornoDellaSettimana;
