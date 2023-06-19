@@ -1,6 +1,5 @@
 package controller.gestore;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,6 +10,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Gestore;
+import persistence.Database;
+
+import java.io.IOException;
 
 public class LoginController {
 
@@ -22,35 +25,42 @@ public class LoginController {
 	
 	@FXML
 	Label errorLabel;
+	Database data= Database.getInstance();
 
 	public void eseguiVerificaCredenziali(MouseEvent event) throws IOException
 	{
 		String username=usernameField.getText();
 		String password=passwordField.getText();
 
-		String usernameTest = "Mario";
-		String passwordTest = "Rossi";
-		if(username.contentEquals(usernameTest) && password.contentEquals(passwordTest))
+
+		boolean found=false;
+		for(Gestore g:data.getGestori())
+		{
+			if(g.getUsername().equalsIgnoreCase(username) &&
+					g.getPassword().equals(password))
+			{
+				found=true;
+				data.setUsernameUtenteAttuale(g.getUsername());
+				break;
+			}
+		}
+		if(found)
 		{
 			FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/gestore/HomeGestore.fxml"));
 			Parent root = loader.load();
-			HomeGestoreController homeGestoreController=loader.getController();
-			
-			homeGestoreController.displayName(username);
 
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}
-		
 		else
 		{
 			errorLabel.setText("Errore! Username o password errati.");
 			usernameField.clear();
 			passwordField.clear();
 		}
-		
+
 	}
 	
 }

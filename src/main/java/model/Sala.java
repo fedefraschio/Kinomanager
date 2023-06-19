@@ -31,7 +31,7 @@ public class Sala {
     {
         this.numeroPosti = numeroPosti;
         this.numeroSala = numeroSala;
-        this.listaPosti=new ArrayList<Posto>();
+        this.listaPosti= new ArrayList<>();
         int numPosto=1;
         int fila=1;
         for(int i=0;i<numeroPosti;i++)
@@ -94,7 +94,6 @@ public class Sala {
         else //aggiorno i posti e il numero di posti
         {
             //ho abbastanza posti, ciclo finchè non raggiungo quel numero
-            int index=0;
             for(Posto p:this.listaPosti)
             {
                 if(result==numeroPosti)

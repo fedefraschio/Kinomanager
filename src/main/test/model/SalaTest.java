@@ -1,6 +1,5 @@
 package model;
 
-import model.*;
 import model.Sala;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -15,13 +15,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.*;
+import model.Abbonamento;
+import model.GiornoDellaSettimana;
+import model.Spettacolo;
+import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class AcquistaController implements Initializable {
@@ -48,62 +50,43 @@ public class AcquistaController implements Initializable {
     private TextField quantitaPostiField;
 
 
-    ObservableList<Spettacolo> listSpettacoli;
+    Database data=Database.getInstance();
     ObservableList<GiornoDellaSettimana> giorni;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Film f1=new Film("Fast X","Azione");
-        Film f2=new Film("Love Again","Romantico");
-        Film f3=new Film("Borromini e Bernini","Storico");
-
-
-        Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-                new Film("Fast X","Azione"), new Sala(5,200),
-                 LocalTime.of(21, 0));
-        Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-                new Film("Love Again","Romantico"), new Sala(4,50),
-                 LocalTime.of(15,30));
-        Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
-                new Film("Borromini e Bernini","Storico"), new Sala(1,25),
-                 LocalTime.of(21, 0));
-
-        listSpettacoli=FXCollections.observableArrayList(s1,s2,s3);
         giorni=FXCollections.observableArrayList(GiornoDellaSettimana.Lunedì,GiornoDellaSettimana.Martedì,
                 GiornoDellaSettimana.Mercoledì,GiornoDellaSettimana.Giovedì,GiornoDellaSettimana.Venerdì,
                 GiornoDellaSettimana.Sabato,GiornoDellaSettimana.Domenica);
         giornoComboBox.setItems(giorni);
-        filmComboBox.setItems(FXCollections.observableArrayList(f1.getTitolo(),f2.getTitolo(),f3.getTitolo()));
-
-
+        filmComboBox.setItems(data.getTitoliSpettacoli());
     }
 
 
     @FXML
     void acquistaBiglietto() {
         String[] parametri=filmList.getSelectionModel().getSelectedItem().split(" ; ");
-        ObservableList<Spettacolo> newListSpettacoli=FXCollections.observableArrayList();
-        for(Spettacolo s:listSpettacoli)
+        for(Spettacolo s: data.getSpettacoli())
         {
             if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
                     s.getNumeroSala()==Integer.parseInt(parametri[1]) &&
                     s.getGiornoDellaSettimana().equals(GiornoDellaSettimana.getGiornoDaString(parametri[2])) &&
                     s.getOrario().equals(LocalTime.parse(parametri[3]))) {
                 int bigliettiDaAcquistare = Integer.parseInt(quantitaPostiField.getText());
-                s.acquistaBiglietti(bigliettiDaAcquistare);
-                postiTextField.clear();
-                quantitaPostiField.clear();
+                if (data.acquistaBiglietti(bigliettiDaAcquistare, s) > 0) {
+                    postiTextField.clear();
+                    quantitaPostiField.clear();
+                } else {
+                    quantitaPostiField.setText("Posti insufficienti!");
+                    postiTextField.clear();
+                }
+                break;
             }
-
-                newListSpettacoli.add(s);
 
         }
         filmComboBox.setValue(null);
         giornoComboBox.setValue(null);
         filmList.setItems(null);
-        listSpettacoli.clear();
-        listSpettacoli.addAll(newListSpettacoli);
-
     }
 
 
@@ -126,7 +109,7 @@ public class AcquistaController implements Initializable {
         String titolo=filmComboBox.getSelectionModel().getSelectedItem();
         GiornoDellaSettimana giorno=giornoComboBox.getSelectionModel().getSelectedItem();
         ObservableList<String> spettacoliMostrati=FXCollections.observableArrayList();
-        for(Spettacolo s:listSpettacoli)
+        for(Spettacolo s:data.getSpettacoli())
         {
             if(s.getFilm().getTitolo().equalsIgnoreCase(titolo) &&
                     s.getGiornoDellaSettimana().equals(giorno))
@@ -140,9 +123,11 @@ public class AcquistaController implements Initializable {
 
     @FXML
     void creaAbbonamento() {
-        Abbonamento abbonamento=new Abbonamento(92346,abbonamentoDatePicker.getValue());
+        Random r=new Random();
+        Abbonamento a=new Abbonamento(r.nextInt(1000),abbonamentoDatePicker.getValue());
+        data.addAbbonamento(a);
         this.abbonamentoAttivoLabel.setText("Hai 1 abbonamento attivo! Data di scadenza: "+
-                abbonamento.getDataAttivazione().plusDays(90));
+                a.getDataAttivazione().plusDays(90));
 
 
     }
@@ -150,7 +135,7 @@ public class AcquistaController implements Initializable {
     @FXML
     void rowClicked() {
         String[] parametri=filmList.getSelectionModel().getSelectedItem().split(" ; ");
-        for(Spettacolo s:listSpettacoli)
+        for(Spettacolo s: data.getSpettacoli())
         {
             if(s.getTitoloFilm().equalsIgnoreCase(parametri[0])&&
             s.getNumeroSala()==Integer.parseInt(parametri[1]) &&

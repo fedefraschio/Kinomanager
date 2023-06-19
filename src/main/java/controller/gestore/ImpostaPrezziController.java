@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,8 +23,7 @@ public class ImpostaPrezziController implements Initializable {
     @FXML
     private TextField textBiglietto;
 
-    private float prezzoBiglietto;
-    private float prezzoAbbonamento;
+    Database data=Database.getInstance();
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -39,21 +39,19 @@ public class ImpostaPrezziController implements Initializable {
     @FXML
     void submitBiglietto()
     {
-        this.prezzoBiglietto=Float.parseFloat(this.textBiglietto.getText());
-        this.textBiglietto.setText(String.valueOf(this.prezzoBiglietto));
+        data.setPrezzoBiglietto(Float.parseFloat(this.textBiglietto.getText()));
+        //this.textBiglietto.setText(String.valueOf(this.prezzoBiglietto));
     }
     @FXML
     void submitAbbonamento()
     {
-        this.prezzoAbbonamento=Float.parseFloat(this.textAbbonamento.getText());
-        this.textAbbonamento.setText(String.valueOf(this.prezzoAbbonamento));
+        data.setPrezzoAbbonamento(Float.parseFloat(this.textAbbonamento.getText()));
+        //this.textAbbonamento.setText(String.valueOf(this.prezzoAbbonamento));
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.prezzoBiglietto= 9.00F;
-        this.prezzoAbbonamento= 40.00F;
-        this.textBiglietto.setText(String.valueOf(this.prezzoBiglietto));
-        this.textAbbonamento.setText(String.valueOf(this.prezzoAbbonamento));
+        this.textBiglietto.setText(String.valueOf(data.getPrezzoBiglietto()));
+        this.textAbbonamento.setText(String.valueOf(data.getPrezzoAbbonamento()));
     }
 }

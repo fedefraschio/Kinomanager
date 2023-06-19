@@ -19,13 +19,11 @@ import model.Film;
 import model.GiornoDellaSettimana;
 import model.Sala;
 import model.Spettacolo;
+import persistence.Database;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class GestioneProgrammazioneController implements Initializable{
@@ -57,10 +55,7 @@ public class GestioneProgrammazioneController implements Initializable{
 	@FXML
 	private TableColumn<Spettacolo, String> titolo;
 
-	//comparator per ordinare la table
-	Comparator<Spettacolo> spettacoloComparator;
-
-	ObservableList<Spettacolo> list;
+	Database data= Database.getInstance();
 
 	ObservableList<GiornoDellaSettimana> giornoList;
 
@@ -78,7 +73,8 @@ public class GestioneProgrammazioneController implements Initializable{
 	@FXML
 	void removeRiga() {
 		int selectedID=programmazione.getSelectionModel().getSelectedIndex();
-		programmazione.getItems().remove(selectedID);
+		data.removeSpettacolo(selectedID);
+		programmazione.refresh();
 		nomeInput.clear();
 		salaInput.clear();
 		giornoComboBox.setValue(null);
@@ -100,10 +96,9 @@ public class GestioneProgrammazioneController implements Initializable{
 				new Film(nomeInput.getText()), new Sala(Integer.parseInt(salaInput.getText())),
 				LocalTime.parse(orarioInput.getText()));
 
-		ObservableList<Spettacolo> righe=programmazione.getItems();
-		righe.add(s);
-		programmazione.setItems(righe);
-		list.sort(spettacoloComparator);
+		data.addSpettacolo(s);
+		data.sortSpettacoli();
+		programmazione.refresh();
 
 		nomeInput.clear();
 		salaInput.clear();
@@ -113,21 +108,19 @@ public class GestioneProgrammazioneController implements Initializable{
 
 	@FXML
 	void submitGiorno() {
-		ObservableList<Spettacolo> currentTableData=programmazione.getItems();
 		String titolo=nomeInput.getText();
 		int sala=Integer.parseInt(salaInput.getText());
 		LocalTime orario=LocalTime.parse(orarioInput.getText());
 
-		for(Spettacolo s: currentTableData)
+		for(Spettacolo s: data.getSpettacoli())
 		{
 			if(s.getTitoloFilm().equals(titolo) &&
 					s.getNumeroSala()==sala &&
 					s.getOrario().equals(orario))
 			{
 				s.setGiornoDellaSettimana(giornoComboBox.getSelectionModel().getSelectedItem());
-				programmazione.setItems(currentTableData);
+				data.sortSpettacoli();
 				programmazione.refresh();
-				list.sort(spettacoloComparator);
 				break;
 			}
 		}
@@ -139,13 +132,11 @@ public class GestioneProgrammazioneController implements Initializable{
 
 	@FXML
 	void submitOra() {
-
-		ObservableList<Spettacolo> currentTableData=programmazione.getItems();
 		String titolo=nomeInput.getText();
 		int sala=Integer.parseInt(salaInput.getText());
 		GiornoDellaSettimana giorno=giornoComboBox.getSelectionModel().getSelectedItem();
 
-		for(Spettacolo s: currentTableData)
+		for(Spettacolo s: data.getSpettacoli())
 		{
 			if(s.getTitoloFilm().equals(titolo) &&
 					s.getNumeroSala()==sala
@@ -153,9 +144,8 @@ public class GestioneProgrammazioneController implements Initializable{
 			)
 			{
 				s.setOrario(LocalTime.parse(orarioInput.getText()));
-				programmazione.setItems(currentTableData);
+				data.sortSpettacoli();
 				programmazione.refresh();
-				list.sort(spettacoloComparator);
 				break;
 			}
 		}
@@ -167,25 +157,11 @@ public class GestioneProgrammazioneController implements Initializable{
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		spettacoloComparator= Comparator.comparing(Spettacolo::getGiornoDellaSettimana).
-				thenComparing(Spettacolo::getOrario).thenComparing(Spettacolo::getNumeroSala);
-		//dati per la tabella
-		Spettacolo s1=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-				new Film("Fast X","Azione"), new Sala(5,200),
-				LocalTime.of(21, 0));
-		Spettacolo s2=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 23).getDayOfWeek()),
-				new Film("Love Again","Romantico"), new Sala(4,100),
-				LocalTime.of(15,30));
-		Spettacolo s3=new Spettacolo(GiornoDellaSettimana.getGiornoDaDay(LocalDate.of(2023, Month.JUNE, 21).getDayOfWeek()),
-				new Film("Borromini e Bernini","Storico"), new Sala(1,50),
-				LocalTime.of(21, 0));
 		titolo.setCellValueFactory(new PropertyValueFactory<>("titoloFilm"));
 		sala.setCellValueFactory(new PropertyValueFactory<>("numeroSala"));
 		giornoDellaSettimana.setCellValueFactory(new PropertyValueFactory<>("giornoDellaSettimana"));
 		ora.setCellValueFactory(new PropertyValueFactory<>("orario"));
-		list=FXCollections.observableArrayList(s1,s2,s3);
-		programmazione.setItems(list);
-		list.sort(spettacoloComparator);
+		programmazione.setItems(data.getSpettacoli());
 		giornoList=FXCollections.observableArrayList(GiornoDellaSettimana.Lunedì,GiornoDellaSettimana.Martedì,
 				GiornoDellaSettimana.Mercoledì,GiornoDellaSettimana.Giovedì,GiornoDellaSettimana.Venerdì,
 				GiornoDellaSettimana.Sabato,GiornoDellaSettimana.Domenica);
